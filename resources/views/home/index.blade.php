@@ -1,6 +1,6 @@
-@extends('layouts.home');
+@extends('layouts.home')
 
-@section('title', 'yeni sayfa');
+@section('title', 'yeni sayfa')
 
 @section('content')
 
