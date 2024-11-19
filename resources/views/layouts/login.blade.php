@@ -27,22 +27,21 @@
                     <div class="row gy-5 justify-content-center">
                         <div class="col-12 col-lg-5">
 
-                            <form action="{{ route('admin_LoginCheck') }}" name="lofinForm" method="POST">
+                            <form action="{{ route('admin_LoginCheck') }}" name="loginForm" method="POST">
                                 @csrf
                                 <div class="row gy-3 overflow-hidden">
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="email" class="form-control border-0 border-bottom rounded-0"
-                                                name="loginEmail" id="email" placeholder="name@example.com"
-                                                required>
+                                                name="email" id="email" placeholder="name@example.com" required>
                                             <label for="email" class="form-label">Email</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control border-0 border-bottom rounded-0"
-                                                name="loginPassword" id="password" value=""
-                                                placeholder="Password" required>
+                                                name="password" id="loginpassword" value="" placeholder="Password"
+                                                required>
                                             <label for="password" class="form-label">Password</label>
                                         </div>
                                     </div>

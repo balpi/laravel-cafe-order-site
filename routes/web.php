@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 route::get("/home", [HomeController::class, "index"]);
 route::get("/admin/login", [LoginController::class, "index"]);
-route::get("/admin", [\App\Http\Controllers\admin\HomeController::class, "index"])->name("admin");
+route::get("/admin", [\App\Http\Controllers\admin\HomeController::class, "index"])->name("admin")->middleware(middleware: 'auth');
 route::post("/admin/LoginCheck", [\App\Http\Controllers\admin\HomeController::class, "LoginCheck"])->name("admin_LoginCheck");
-
+route::post('/', [\App\Http\Controllers\admin\HomeController::class, "logout"])->name("Logout");
 Route::get('/', function () {
     return view('welcome');
 });
