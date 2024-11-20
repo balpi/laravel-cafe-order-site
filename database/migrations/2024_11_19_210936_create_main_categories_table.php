@@ -10,18 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('maincategory', function (Blueprint $table) {
             $table->id('ID')->autoIncrement();
             $table->string('Title');
-            $table->string('Keywords');
-            $table->string('Description');
-            $table->string('Image');
-            $table->boolean('Status');
-            $table->unsignedInteger('maincategory_ID');
-            $table->foreign('maincategory_ID')
-                ->references('ID')
-                ->on('maincategory');
-
+            $table->text('Description');
             $table->timestamps();
         });
     }
@@ -31,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('maincategory');
     }
 };
