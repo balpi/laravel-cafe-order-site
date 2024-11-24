@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\CategoryController;
+
 
 
 Route::middleware('auth')->prefix('admin')->group(function () {
