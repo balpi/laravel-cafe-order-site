@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('Keywords');
             $table->string('Description');
             $table->string('Image');
-            $table->integer('Category_ID');
+            $table->unsignedBigInteger('Category_ID');
 
             $table->foreign('Category_ID')->references('ID')->on('categories');
             $table->text('Detail');

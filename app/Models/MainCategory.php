@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MainCategory extends Model
+class maincategory extends Model
 {
-    /** @use HasFactory<\Database\Factories\MainCategoryFactory> */
+    /** @use HasFactory<\Database\Factories\MaincategoryFactory> */
     use HasFactory;
 }

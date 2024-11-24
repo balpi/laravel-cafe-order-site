@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MainCategory;
-use App\Http\Requests\StoreMainCategoryRequest;
-use App\Http\Requests\UpdateMainCategoryRequest;
+use App\Models\maincategory;
+use App\Http\Requests\StoremaincategoryRequest;
+use App\Http\Requests\UpdatemaincategoryRequest;
 
-class MainCategoryController extends Controller
+class MaincategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class MainCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMainCategoryRequest $request)
+    public function store(StoremaincategoryRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class MainCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MainCategory $mainCategory)
+    public function show(maincategory $maincategory)
     {
         //
     }
@@ -43,7 +43,7 @@ class MainCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MainCategory $mainCategory)
+    public function edit(maincategory $maincategory)
     {
         //
     }
@@ -51,7 +51,7 @@ class MainCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMainCategoryRequest $request, MainCategory $mainCategory)
+    public function update(UpdatemaincategoryRequest $request, maincategory $maincategory)
     {
         //
     }
@@ -59,7 +59,7 @@ class MainCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MainCategory $mainCategory)
+    public function destroy(maincategory $maincategory)
     {
         //
     }

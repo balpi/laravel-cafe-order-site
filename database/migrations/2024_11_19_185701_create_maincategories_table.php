@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('maincategory', function (Blueprint $table) {
+        Schema::create('maincategories', function (Blueprint $table) {
             $table->id('ID')->autoIncrement();
             $table->string('Title');
             $table->text('Description');
@@ -23,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('maincategory');
+        Schema::dropIfExists('maincategories');
     }
 };

@@ -13,7 +13,13 @@
 padding: 15px 50px 5px 50px;
 float: right;
 font-size: 16px;"> Last access : 30 May
-            2014 &nbsp; <a href="{{ route('Logout') }}" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="post">
+                {{ csrf_field() }}
+                2014 &nbsp; <button type="submit" class="btn btn-danger square-btn-adjust">Logout</button>
+            </form>
+
+        </div>
     </nav>
 
     <!-- /. NAV TOP  -->

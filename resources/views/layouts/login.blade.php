@@ -27,7 +27,7 @@
                     <div class="row gy-5 justify-content-center">
                         <div class="col-12 col-lg-5">
 
-                            <form action="{{ route('admin_LoginCheck') }}" name="loginForm" method="POST">
+                            <form action="{{ route('LoginCheck') }}" method="post">
                                 @csrf
                                 <div class="row gy-3 overflow-hidden">
                                     <div class="col-12">
@@ -40,7 +40,7 @@
                                     <div class="col-12">
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control border-0 border-bottom rounded-0"
-                                                name="password" id="loginpassword" value="" placeholder="Password"
+                                                name="password" id="password" value="" placeholder="Password"
                                                 required>
                                             <label for="password" class="form-label">Password</label>
                                         </div>

@@ -3,22 +3,37 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\CategoryController;
+
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+
+    Route::get("/", [App\Http\Controllers\admin\HomeController::class, "index"])
+        ->name("admin");
+
+    Route::get('category', [CategoryController::class, "index"])->name('admin_category');
+    Route::get('category/add', [CategoryController::class, "store"])->name('admin_category_add');
+    Route::get('category/add', [CategoryController::class, "update"])->name('admin_category_update');
+
+});
 
 route::get("/home", [HomeController::class, "index"]);
-route::get("/admin/login", [LoginController::class, "index"]);
-route::get("/admin", [\App\Http\Controllers\admin\HomeController::class, "index"])->name("admin")->middleware(middleware: 'auth');
-route::post("/admin/LoginCheck", [\App\Http\Controllers\admin\HomeController::class, "LoginCheck"])->name("admin_LoginCheck");
-route::post('/', [\App\Http\Controllers\admin\HomeController::class, "logout"])->name("Logout");
-Route::get('/', function () {
+
+
+
+
+route::post("/admin/LoginCheck", [App\Http\Controllers\admin\HomeController::class, "LoginCheck"])
+    ->name("LoginCheck");
+
+
+route::get("/login", [LoginController::class, "index"])->name('login');
+
+
+
+route::post('/', [App\Http\Controllers\admin\HomeController::class, "logout"])->name("Logout");
+route::get('/', function () {
     return view('welcome');
 });
+route::post('/logout', [\App\Http\Controllers\admin\HomeController::class, "logout"])->name('logout');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+
