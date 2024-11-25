@@ -27,7 +27,7 @@ class HomeController extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
 
-                return redirect()->intended('/admin');
+                return redirect()->intended('/admin')->with('useremail', session('email'));
             }
 
             return back()->withErrors([

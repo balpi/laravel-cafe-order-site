@@ -13,6 +13,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         ->name("admin");
 
     Route::get('category', [CategoryController::class, "index"])->name('admin_category');
+
     Route::get('category/add', [CategoryController::class, "store"])->name('admin_category_add');
     Route::get('category/add', [CategoryController::class, "update"])->name('admin_category_update');
 

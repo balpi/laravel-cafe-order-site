@@ -1,20 +1,31 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Controllers\Controller;
+use Request;
+use Illuminate\Support\Facades\Log;
+
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request = null)
     {
-        return view('admin.blank');
+
+
+        if ($request !== null) {
+            Log::info($request);
+        }
+        $page = 10;
+
+        $categorylist = DB::table('categories')->paginate($page, ['*'], 1);
+        return view('admin.category', ['categorylist' => $categorylist]);
     }
 
     /**

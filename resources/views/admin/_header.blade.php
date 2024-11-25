@@ -7,7 +7,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Binary admin</a>
+            <a class="navbar-brand" href="index.html">
+                <h5>{{ Auth::user()->email }}</h5>
+
+            </a>
         </div>
         <div style="color: white;
 padding: 15px 50px 5px 50px;

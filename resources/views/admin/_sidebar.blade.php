@@ -2,15 +2,23 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li class="text-center">
-                <img src="assets/img/find_user.png" class="user-image img-responsive" />
+                <img src="{{ asset('assets') }}/img/find_user.png" class="user-image img-responsive" />
             </li>
 
 
             <li>
-                <a class="active-menu" href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                <a class="active-menu" href="{{ route('admin') }}"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
             </li>
             <li>
-                <a href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
+                <a href="ui.html"><i class="fa fa-desktop fa-3x"></i> Main Categories</a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin_category') }}"><i class="fa fa-desktop fa-3x"></i> Categories</a>
+            </li>
+
+            <li>
+                <a href="ui.html"><i class="fa fa-desktop fa-3x"></i> Products</a>
             </li>
             <li>
                 <a href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
