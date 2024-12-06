@@ -4,10 +4,12 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
-use Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Str;
+
 
 
 class CategoryController extends Controller
@@ -15,17 +17,32 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request = null)
+    public function index(Request $request)
     {
 
 
-        if ($request !== null) {
-            Log::info($request);
-        }
-        $page = 10;
+        if ($request->has('items')) {
+            $page = $request->items;
 
-        $categorylist = DB::table('categories')->paginate($page, ['*'], 1);
-        return view('admin.category', ['categorylist' => $categorylist]);
+        } else {
+            $page = 10;
+        }
+        $search = "";
+        if ($request->has('search') and Str::length($request->search) > 1) {
+            error_log($request->search);
+            $search = $request->search;
+
+            $categorylist = DB::table('categories')
+                ->where('Title', 'LIKE', '%' . $search . '%')
+                ->paginate($page, ['*'], 1);
+        } else {
+            $categorylist = DB::table('categories')
+                ->paginate($page, ['*'], 1);
+        }
+
+
+
+        return view('admin._tableCategory', ['data' => $categorylist]);
     }
 
     /**
@@ -63,16 +80,43 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function find($id, $alert = "")
     {
-        //
+        error_log($id . '---serhat  -' . $alert);
+        $data = Category::find($id)->toArray();
+
+
+        return view('admin._categoryForm', ['data' => $data, 'alert' => $alert]);
+
+    }
+    public function update(Request $request): RedirectResponse
+    {
+
+
+
+
+        Category::where('ID', $request->ID)
+            ->update(
+                [
+                    'Title' => $request->Title,
+                    'Keywords' => $request->Keywords,
+                    'Description' => $request->Description,
+                    'Image' => $request->Image,
+                    'Status' => $request->Status,
+                    'updated_at' => Carbon::now()
+                ]
+
+            );
+        return redirect('admin/category/find/' . $request->ID . '/alert');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, $id)
     {
-        //
+        Category::where('ID', '=', $id)->delete();
+        return redirect('admin/category/?alert=alertDel');
     }
 }

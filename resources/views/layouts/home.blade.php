@@ -12,7 +12,20 @@
     <title>@yield('title')</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+
+
+    <link href="{{ @asset('assets') }}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ @asset('assets') }}/css/templatemo-style.css" rel="stylesheet" />
+
+
+    <style>
+        #nav {
+            overflow: hidden
+                /* remove */
+                width: 100%;
+        }
+    </style>
+
 </head>
 <!--
 
@@ -24,20 +37,21 @@ https://templatemo.com/tm-539-simple-house
 
 <body>
     <div class="container">
-        <div>
+        <div class="row">
             @include('home._header')
 
         </div>
-        <div class="container">
+        <div class="row">
             @include('home._content')
         </div>
-        <div>
+        <div class="row">
             @include('home._footer')
         </div>
 
     </div>
     <script src="{{ @asset('assets') }}/js/jquery.min.js"></script>
     <script src="{{ @asset('assets') }}/js/parallax.min.js"></script>
+    <script src="{{ @asset('assets') }}/js/bootstrap.bundle.js"></script>
     <script>
         $(document).ready(function() {
             // Handle click on paging links
@@ -52,6 +66,7 @@ https://templatemo.com/tm-539-simple-house
             });
         });
     </script>
+
 </body>
 
 </html>

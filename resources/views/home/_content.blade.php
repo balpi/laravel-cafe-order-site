@@ -7,13 +7,31 @@
     </header>
 
     <div class="tm-paging-links">
-        <nav>
-            <ul>
-                <li class="tm-paging-item"><a href="#" class="tm-paging-link active">İçecekler</a></li>
-                <li class="tm-paging-item"><a href="#" class="tm-paging-link">Yemekler</a></li>
-                <li class="tm-paging-item"><a href="#" class="tm-paging-link">Menüler</a></li>
-            </ul>
-        </nav>
+        @foreach ($maincategory as $maincat)
+            <div class="btn-group">
+                <button type="button" class="btn  btn-danger">{{ $maincat->Title }}</button>
+                <button type="button" style="height:auto" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="sr-only"></span>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-lg-start">
+
+                    @foreach ($category->where('maincategories_ID', $maincat->ID) as $cat)
+                        <a class="dropdown-item" href="#">{{ $cat->Title }}</a>
+                    @endforeach
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">{{ $maincat->Title }} All</a>
+
+                </div>
+
+
+
+            </div>
+        @endforeach
+
+
+
     </div>
 
     <!-- Gallery -->

@@ -21,7 +21,7 @@ class HomeController extends Controller
     {
 
 
-        Log::info($request);
+
         if ($request->isMethod('post')) {
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {

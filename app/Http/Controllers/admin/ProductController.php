@@ -1,19 +1,45 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\StoreCategoryRequest;
+use illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Str;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        if ($request->has('items')) {
+            $page = $request->items;
+
+        } else {
+            $page = 10;
+        }
+        $search = "";
+        if ($request->has('search') and Str::length($request->search) > 1) {
+            error_log($request->search);
+            $search = $request->search;
+
+            $categorylist = Product::where('Title', 'LIKE', '%' . $search . '%')
+                ->paginate($page, ['*'], 1);
+        } else {
+            $categorylist = DB::table('products')
+                ->paginate($page, ['*'], 1);
+        }
+
+
+
+        return view('admin._tableProduct', ['data' => $categorylist]);
     }
 
     /**

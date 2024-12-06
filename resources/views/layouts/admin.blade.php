@@ -14,29 +14,27 @@
     <!-- CUSTOM STYLES-->
     <link href="{{ @asset('assets') }}/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <div id="wrapper">
 
-
-        <div class="">
-            <div class="row">
-                @include('admin._header')
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    @include('admin._sidebar')
-                </div>
-                <div class="col-9">
-                    @include('admin._content')
-                </div>
-            </div>
-
-            @include('admin._footer')
-
-
+        <div class="row">
+            @include('admin._header')
         </div>
+        <div class="row">
+            <div class="col-2">
+                @include('admin._sidebar')
+            </div>
+            <div class="col-9">
+                @include('admin._content')
+            </div>
+        </div>
+
+        @include('admin._footer')
+
+
+
     </div>
 </body>

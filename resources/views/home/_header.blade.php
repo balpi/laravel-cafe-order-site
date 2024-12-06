@@ -3,8 +3,10 @@
 
 
 
-<div class="placeholder">
+<div>
     <div class="parallax-window" data-parallax="scroll" data-image-src="{{ @asset('assets') }}/img/simple-house-01.jpg">
+
+
         <div class="tm-header">
             <div class="row tm-header-inner">
                 <div class="col-md-6 col-12">
@@ -25,5 +27,6 @@
                 </nav>
             </div>
         </div>
+
     </div>
 </div>

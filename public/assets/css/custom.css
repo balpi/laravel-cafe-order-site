@@ -320,6 +320,15 @@ color:#fff;
 border:0px solid black;
      
 }
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 .navbar-header {
     background: #A70303;
 }
