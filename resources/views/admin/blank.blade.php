@@ -51,7 +51,7 @@
     <script src="{{ asset('assets') }}/js/jquery.metisMenu.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="{{ asset('assets') }}/js/custom.js"></script>
-
+    @yield('blank_scripts')
 
 </body>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use illuminate\Http\RedirectResponse;
@@ -50,15 +51,36 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data = Category::all()->firstOrFail()->toArray();
+
+        return view('admin._categoryFormAdd', ['data' => $data]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(Request $request)
     {
-        //
+
+
+        $creted = Category::create(
+            [
+                'ID',
+                'Title' => $request->Title,
+                'Keywords' => $request->Keywords,
+                'Description' => $request->Description,
+                'maincategories_ID' => $request->maincategories_ID,
+                'Image' => $request->Image,
+                'Status' => $request->Status,
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
+            ]
+
+        );
+
+
+        return redirect('admin/category/find/' . $creted->id . '/alert');
+
     }
 
     /**
@@ -82,22 +104,20 @@ class CategoryController extends Controller
      */
     public function find($id, $alert = "")
     {
-        error_log($id . '---serhat  -' . $alert);
+
         $data = Category::find($id)->toArray();
 
-
-        return view('admin._categoryForm', ['data' => $data, 'alert' => $alert]);
+        error_log('SERHAT BAK BURA' . $alert);
+        return view('admin._categoryFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse
     {
 
-
-
-
         Category::where('ID', $request->ID)
             ->update(
                 [
+
                     'Title' => $request->Title,
                     'Keywords' => $request->Keywords,
                     'Description' => $request->Description,
@@ -107,6 +127,7 @@ class CategoryController extends Controller
                 ]
 
             );
+        error_log('SERHAT UPDATE' . $request->ID);
         return redirect('admin/category/find/' . $request->ID . '/alert');
 
     }
