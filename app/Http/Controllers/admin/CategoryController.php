@@ -88,7 +88,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return Category::all()->toArray();
     }
 
     /**
@@ -107,7 +107,7 @@ class CategoryController extends Controller
 
         $data = Category::find($id)->toArray();
 
-        error_log('SERHAT BAK BURA' . $alert);
+
         return view('admin._categoryFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
@@ -127,7 +127,7 @@ class CategoryController extends Controller
                 ]
 
             );
-        error_log('SERHAT UPDATE' . $request->ID);
+
         return redirect('admin/category/find/' . $request->ID . '/alert');
 
     }

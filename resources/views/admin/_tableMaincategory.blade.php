@@ -5,14 +5,9 @@
 @section('table_th')
     <th>Proccess</th>
     <th>Name</th>
-    <th>Keywords</th>
     <th>Description</th>
-    <th>CategoryID</th>
-    <th>Image</th>
-    <th>Status</th>
     <th>Create Date</th>
     <th>Last Update</th>
-    <th>CategoryName</th>
 @endsection
 
 @section('table_tbody')
@@ -23,25 +18,12 @@
                 <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger">Remove</button>
             </td>
             <td>{{ $cat->Title }}</td>
-            <td>{{ $cat->Keywords }}</td>
             <td>{{ $cat->Description }}</td>
-            <td>{{ $cat->Category_ID }}</td>
-            <td>
-                @if ($cat->Image)
-                    <img class="img-fluid img-thumbnail" src="{{ Storage::url($cat->Image) }}" alt="">
-            </td>
-    @endif
-
-    <td>{{ $cat->Status }}</td>
-
-    <td class="center">{{ $cat->created_at }}</td>
-    <td class="center">{{ $cat->updated_at }}</td>
-    <td class="center">{{ $cat->mainName }}</td>
-    </tr>
+            <td class="center">{{ $cat->created_at }}</td>
+            <td class="center">{{ $cat->updated_at }}</td>
+        </tr>
     @endforeach
 @endsection
-
-
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assets') }}/js/jquery-1.10.2.js"></script>
@@ -63,17 +45,15 @@
         buttonsArray.forEach((item) => {
             item.addEventListener("click", function() {
                 if (item.hasAttribute('miss')) {
-
                     if (event.target.getAttribute('miss') == "Update") {
-                        window.location =
-                            "{{ route('admin_product_find') }}/" +
-                            event.target.getAttribute('data-ID')
 
+                        window.location =
+                            "{{ route('admin_maincategory_find') }}/" +
+                            event.target.getAttribute('data-ID')
                     } else {
                         window.location =
-                            "{{ route('admin_product_remove') }}/" +
+                            "{{ route('admin_maincategory_remove') }}/" +
                             event.target.getAttribute('data-ID')
-
                     }
 
 
@@ -91,12 +71,18 @@
             }
         });
     </script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="{{ asset('assets') }}/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="{{ asset('assets') }}/js/custom.js"></script>
 @endsection
+
 @section('new_button')
     <div class="row">
         <div class="col-3"></div>
         <div class="col-3">
-            <button onclick="window.location.href='{{ route('admin_product_add') }}'" class="btn btn-primary">Add
+            <button onclick="window.location.href='{{ route('admin_maincategory_add') }}'" class="btn btn-primary">Add
                 New</button>
         </div>
     </div>

@@ -18,15 +18,8 @@ return new class extends Migration {
             $table->string('Image');
             $table->boolean('Status');
 
-            //$table->unsignedInteger('maincategories_ID');
+
             $table->foreignId('maincategories_ID')->constrained('maincategories')->references('ID');
-            //$table->foreign('maincategories_ID')
-            // ->references('id')
-            // ->on('maincategories');
-
-
-            //$table->foreign('maincategory_ID')->references('ID')->on('maincategory');
-
             $table->timestamps();
         });
     }

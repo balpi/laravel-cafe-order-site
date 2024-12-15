@@ -9,4 +9,10 @@ class maincategory extends Model
 {
     /** @use HasFactory<\Database\Factories\MaincategoryFactory> */
     use HasFactory;
+    protected $fillable = [
+        'Title',
+        'Description',
+        'updated_at',
+        'created_at'
+    ];
 }

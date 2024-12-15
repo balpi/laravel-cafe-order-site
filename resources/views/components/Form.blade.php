@@ -7,31 +7,98 @@
         </button>
     </div>
 @endif
-<form action=@yield('form_action') id="dynamic_form" method="post">
+<form action=@yield('form_action') enctype="multipart/form-data" id="dynamic_form" name="dynamic_form" method="post">
     @csrf
 
     @foreach ($data as $cat => $value)
         <div class="form-group">
 
 
-            <label for="{{ $cat }}">{{ $cat }}</label>
+
+            <label for="{{ $cat }}" id="labelfor{{ $cat }}">{{ $cat }}</label>
+
             @if (str_contains(url()->current(), 'add'))
-                <input class="form-control" name="{{ $cat }}" id="{{ $cat }}"
-                    aria-describedby="emailHelp">
+                @if (str_contains($cat, 'Category_ID'))
+                    <select class="form-select" aria-label="Default select example" name="{{ $cat }}">
+                        <option selected></option>
+
+                        @foreach ($dataCategory as $dataCat)
+                            <option value="{{ $dataCat->ID }}">{{ $dataCat->Title }}</option>
+                        @endforeach
+                    </select>
+                @elseif (str_contains($cat, 'User_ID'))
+                    <select class="form-select" aria-label="Default select example" name="{{ $cat }}">
+                        <option selected></option>
+
+                        @foreach ($dataUser as $dataUserEx)
+                            <option value="{{ $dataUserEx->id }}">{{ $dataUserEx->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                @elseif($cat == 'Image')
+                    <input type="file" class="form-control" name="{{ $cat }}" id="{{ $cat }}">
+                @elseif ($cat == 'Description')
+                    <textarea class="ckeditor" name="Description" id="Description" rows="10"></textarea>
+                @elseif (str_contains($cat, 'tatus'))
+                    <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
+                        aria-label="Default select example">
+                        <option selected>Active</option>
+                        <option>Passive</option>
+                    </select>
+                @else
+                    <input class="form-control" name="{{ $cat }}" id="{{ $cat }}"
+                        aria-describedby="emailHelp">
+                @endif
             @else
-                <input value="{{ $value }}" class="form-control" name="{{ $cat }}"
-                    id="{{ $cat }}" aria-describedby="emailHelp">
+                @if (str_contains($cat, 'Category_ID'))
+                    <select class="form-select" id="{{ $cat }}" name="{{ $cat }}">
+                        <option selected></option>
+
+                        @foreach ($dataCategory as $dataCat)
+                            <option {{-- {{ $value === $dataCat->Id ? 'selected' : '' }}  --}}value="{{ $dataCat->Id }}">
+                                {{ $dataCat->Title }}</option>
+                        @endforeach
+                    </select>
+                @elseif (str_contains($cat, 'User_ID'))
+                    <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
+                        aria-label="Default select example">
+                        <option></option>
+
+
+                        @foreach ($dataUser as $dataUserEx)
+                            <option {{ $value === $dataCat->Id ? 'selected' : '' }} value="{{ $dataUserEx->id }}">
+                                {{ $dataUserEx->name }}</option>
+                        @endforeach
+                    </select>
+                @elseif ($cat == 'Image')
+                    <input value="{{ $value }}" title="{{ $value }}" type="file" class="form-control"
+                        name="{{ $cat }}" id="{{ $cat }}">
+                    <script>
+                        document.getElementById("labelfor{{ $cat }}").innerText = "{{ $value }}"
+                    </script>
+                @elseif ($cat == 'Description')
+                    <textarea class="ckeditor" name="Description" id="Description" rows="10">{{ $value }}</textarea>
+                @elseif (str_contains($cat, 'tatus'))
+                    <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
+                        aria-label="Default select example">
+                        <option {{ $value === 'Active' ? 'selected' : '' }}>Active</option>
+                        <option {{ $value === 'Active' ? 'selected' : '' }}>Passive</option>
+                    </select>
+                @else
+                    <input value="{{ $value }}" class="form-control" name="{{ $cat }}"
+                        id="{{ $cat }}" aria-describedby="emailHelp">
+
+
+                    @if ($loop->first)
+                        <script>
+                            var element = document.getElementById("{{ $cat }}");
+                            element.classList.add("d-none")
+                            var element2 = document.getElementById("labelfor{{ $cat }}");
+                            element2.classList.add("d-none")
+                        </script>
+                    @endif
+                @endif
             @endif
-            @if ($loop->first)
-                <script>
-                    var element = document.getElementById("{{ $cat }}");
-                    element.classList.add("d-none")
-                </script>
-            @endif
-
-
-
-
         </div>
     @endforeach
     <button type="submit" class="btn btn-primary">Update</button>

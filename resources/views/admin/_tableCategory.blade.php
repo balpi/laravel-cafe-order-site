@@ -32,6 +32,8 @@
     @endforeach
 @endsection
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery-1.10.2.js"></script>
     <script>
         document.getElementById('pagination').onchange = function() {
             window.location = "{{ $data->url(1) }}&items=" + this.value;

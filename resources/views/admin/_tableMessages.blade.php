@@ -3,16 +3,15 @@
 
 
 @section('table_th')
-    <th>Proccess</th>
-    <th>Name</th>
-    <th>Keywords</th>
-    <th>Description</th>
-    <th>CategoryID</th>
-    <th>Image</th>
-    <th>Status</th>
-    <th>Create Date</th>
-    <th>Last Update</th>
-    <th>CategoryName</th>
+    <th> name</th>
+    <th>email</th>
+    <th>phone</th>
+    <th>subject</th>
+    <th>message</th>
+    <th>ip</th>
+    <th>status</th>
+    <th>created_at</th>
+    <th>updated_at</th>
 @endsection
 
 @section('table_tbody')
@@ -22,22 +21,16 @@
                 <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success">Update</button>
                 <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger">Remove</button>
             </td>
-            <td>{{ $cat->Title }}</td>
-            <td>{{ $cat->Keywords }}</td>
-            <td>{{ $cat->Description }}</td>
-            <td>{{ $cat->Category_ID }}</td>
-            <td>
-                @if ($cat->Image)
-                    <img class="img-fluid img-thumbnail" src="{{ Storage::url($cat->Image) }}" alt="">
-            </td>
-    @endif
+            <td>{{ $cat->name }}</td>
+            <td>{{ $cat->email }}</td>
+            <td>{{ $cat->phone }}</td>
+            <td>{{ $cat->subject }}</td>
+            <td>{{ $cat->message }}</td>
+            <td>{{ $cat->ip }}</td>
 
-    <td>{{ $cat->Status }}</td>
-
-    <td class="center">{{ $cat->created_at }}</td>
-    <td class="center">{{ $cat->updated_at }}</td>
-    <td class="center">{{ $cat->mainName }}</td>
-    </tr>
+            <td class="center">{{ $cat->created_at }}</td>
+            <td class="center">{{ $cat->updated_at }}</td>
+        </tr>
     @endforeach
 @endsection
 
@@ -66,12 +59,12 @@
 
                     if (event.target.getAttribute('miss') == "Update") {
                         window.location =
-                            "{{ route('admin_product_find') }}/" +
+                            "{{ route('admin_messages_find') }}/" +
                             event.target.getAttribute('data-ID')
 
                     } else {
                         window.location =
-                            "{{ route('admin_product_remove') }}/" +
+                            "{{ route('admin_messages_remove') }}/" +
                             event.target.getAttribute('data-ID')
 
                     }
@@ -96,7 +89,7 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-3">
-            <button onclick="window.location.href='{{ route('admin_product_add') }}'" class="btn btn-primary">Add
+            <button onclick="window.location.href='{{ route('admin_messages_add') }}'" class="btn btn-primary">Add
                 New</button>
         </div>
     </div>

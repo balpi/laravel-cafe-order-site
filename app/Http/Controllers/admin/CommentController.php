@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Models\Orders;
-use App\Http\Requests\StoreOrdersRequest;
-use App\Http\Requests\UpdateOrdersRequest;
+use App\Models\Comments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +10,7 @@ use illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
 use Str;
 
-class OrdersController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,17 +30,17 @@ class OrdersController extends Controller
             error_log($request->search);
             $search = $request->search;
 
-            $categorylist = DB::table('orders')
+            $categorylist = DB::table('comment')
                 ->where('Title', 'LIKE', '%' . $search . '%')
                 ->paginate($page, ['*'], 1);
         } else {
-            $categorylist = DB::table('orders')
+            $categorylist = DB::table('faqs')
                 ->paginate($page, ['*'], 1);
         }
 
 
 
-        return view('admin._tableOrders', ['data' => $categorylist]);
+        return view('admin._tableComments', ['data' => $categorylist]);
     }
 
     /**
@@ -52,12 +50,12 @@ class OrdersController extends Controller
     {
 
         try {
-            $data = Orders::all()->firstOrFail()->toArray();
+            $data = Comments::all()->firstOrFail()->toArray();
         } catch (\Throwable $th) {
             $data = ['Name', 'Error'];
         }
 
-        return view('admin._orderFormAdd', ['data' => $data]);
+        return view('admin._commentFormAdd', ['data' => $data]);
     }
 
     /**
@@ -67,29 +65,28 @@ class OrdersController extends Controller
     {
 
 
-        $creted = Orders::create(
+        $creted = Comments::create(
             [
-                'Title' => $request->Title,
-                'Keywords' => $request->Keywords,
-                'Description' => $request->Description,
-                'Category_ID' => $request->Category_ID,
-                'Image' => $request->Image,
+                'ID',
+                'Question' => $request->Question,
+                'Answer' => $request->Answer,
                 'Status' => $request->Status,
-                'created_at' => $request->created_at,
-                'updated_at' => $request->updated_at
+
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]
 
         );
 
 
-        return redirect('admin/orders/find/' . $creted->id . '/alert');
+        return redirect('admin/comments/find/' . $creted->id . '/alert');
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Orders $category)
+    public function show(Comments $category)
     {
         //
     }
@@ -97,7 +94,7 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Orders $category)
+    public function edit(Comments $category)
     {
         //
     }
@@ -108,39 +105,37 @@ class OrdersController extends Controller
     public function find($id, $alert = "")
     {
 
-        $data = Orders::find($id)->toArray();
+        $data = Comments::find($id)->toArray();
 
 
-        return view('admin._orderFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin._commentsFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse
     {
 
-        Orders::where('ID', $request->ID)
+        Comments::where('ID', $request->ID)
             ->update(
                 [
-                    'Title' => $request->Title,
-                    'Keywords' => $request->Keywords,
-                    'Description' => $request->Description,
-                    'Category_ID' => $request->Category_ID,
-                    'Image' => $request->Image,
+
+                    'Question' => $request->Question,
+                    'Answer' => $request->Answer,
                     'Status' => $request->Status,
                     'updated_at' => Carbon::now()
                 ]
 
             );
 
-        return redirect('admin/orders/find/' . $request->ID . '/alert');
+        return redirect('admin/comments/find/' . $request->ID . '/alert');
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $category, $id)
+    public function destroy(Comments $category, $id)
     {
-        Orders::where('ID', '=', $id)->delete();
-        return redirect('admin/orders/?alert=alertDel');
+        Comments::where('ID', '=', $id)->delete();
+        return redirect('admin/comments/?alert=alertDel');
     }
 }
