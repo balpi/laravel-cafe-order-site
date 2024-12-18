@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Requests\StoreImageRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\File;
@@ -12,6 +13,7 @@ use illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Redirect;
 use Storage;
 use Str;
 
@@ -35,20 +37,15 @@ class ProductController extends Controller
             $search = $request->search;
 
             $categorylist = Product::where('Title', 'LIKE', '%' . $search . '%')
-                ->join('categories', 'products.category_ID', '=', 'categories.ID')
-                ->select('products.*', "categories.ID as mainID", "categories.Title as mainName")
                 ->paginate($page, ['*'], 1);
         } else {
 
-            $categorylist = DB::table('products')
-                ->leftjoin('categories', 'products.category_ID', '=', 'categories.ID')
-                ->select('products.*', "categories.ID as mainID", "categories.Title as mainName")
-                ->paginate($page, ['*'], 1);
+            $categorylist = Product::paginate($page, ['*'], 1);
 
         }
 
 
-        return view('admin._tableProduct', ['data' => $categorylist]);
+        return view('admin.product._tableProduct', ['data' => $categorylist]);
     }
 
     /**
@@ -62,7 +59,7 @@ class ProductController extends Controller
         ;
         $dataCategory = Category::all();
         $dataUser = User::all();
-        return view('admin._productFormAdd', [
+        return view('admin.product._productFormAdd', [
             'data' => $data,
             'dataCategory' => $dataCategory,
             'dataUser' => $dataUser
@@ -74,14 +71,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $mes = "";
-        $req = $request->except('_token');
-        foreach ($req as $id => $value) {
-            $mes .= $id . "-----> " . $value . "      ";
-        }
-        error_log('BURADAYIZ ŞİMDİ' . $mes);
 
-        $creted = Product::create(
+
+        $created = Product::create(
             [
                 'ID',
                 'Title' => $request->Title,
@@ -99,8 +91,19 @@ class ProductController extends Controller
 
         );
 
+        $imagerequest = new StoreImageRequest();
+        $imagerequest->Title = $created->Title . " product Main Photo";
+        $imagerequest->Image = $created->Image;
+        $imagerequest->Product_ID = $created->id;
 
-        return redirect('admin/product/find/' . $creted->id . '/alert');
+
+
+        app()->call('App\Http\Controllers\admin\ImageController@store', [
+            "request" => $imagerequest
+        ]);
+
+
+        return redirect('admin/product/find/' . $created->id . '/alert');
     }
 
     /**
@@ -122,13 +125,9 @@ class ProductController extends Controller
     {
 
         $data = Product::where('ID', '=', $id)->first()->toArray();
-
-        ;
-
-
         $dataCategory = Category::all();
         $dataUser = User::all();
-        return view('admin._productFormUpdate', [
+        return view('admin.product._productFormUpdate', [
             'data' => $data,
             'dataCategory' => $dataCategory,
             'dataUser' => $dataUser
@@ -140,7 +139,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(StoreProductRequest $request)
     {
         $image = "";
         if ($request->hasFile('Image')) {
@@ -149,20 +148,16 @@ class ProductController extends Controller
             $product = Product::where('ID', $request->ID)->first();
             $image = $product->Image;
         }
-        $xxas = $request->except('_token');
-        $str = "";
-        foreach ($xxas as $key => $value) {
-            $str .= $key . "----->" . $value . "       ";
-        }
-        error_log('Buraya Dikkat' . $str);
+
         Product::where('ID', $request->ID)
             ->update(
                 [
                     'Title' => $request->Title,
                     'Keywords' => $request->Keywords,
+                    'Detail' => $request->Detail,
                     'Description' => $request->Description,
                     'Category_ID' => $request->Category_ID,
-
+                    'User_ID' => $request->User_ID,
                     'Image' => $image,
 
                     'Status' => $request->Status,

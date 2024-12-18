@@ -42,7 +42,7 @@ class OrdersController extends Controller
 
 
 
-        return view('admin._tableOrders', ['data' => $categorylist]);
+        return view('admin.order._tableOrders', ['data' => $categorylist]);
     }
 
     /**
@@ -57,7 +57,7 @@ class OrdersController extends Controller
             $data = ['Name', 'Error'];
         }
 
-        return view('admin._orderFormAdd', ['data' => $data]);
+        return view('admin.order._orderFormAdd', ['data' => $data]);
     }
 
     /**
@@ -111,7 +111,7 @@ class OrdersController extends Controller
         $data = Orders::find($id)->toArray();
 
 
-        return view('admin._orderFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.order._orderFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse

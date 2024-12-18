@@ -43,7 +43,7 @@ class UserController extends Controller
             $str .= $key . "----";
         }
 
-        return view('admin._tableUsers', ['data' => $categorylist]);
+        return view('admin.user._tableUsers', ['data' => $categorylist]);
     }
 
     /**
@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         $data = User::all()->firstOrFail()->toArray();
 
-        return view('admin._usersFormAdd', ['data' => $data]);
+        return view('admin.user._usersFormAdd', ['data' => $data]);
     }
 
 
@@ -104,7 +104,7 @@ class UserController extends Controller
     {
         $data = User::find($id)->toArray();
 
-        return view('admin._usersFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.user._usersFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
 

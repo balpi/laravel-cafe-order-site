@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\admin;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use illuminate\Http\RedirectResponse;
@@ -43,7 +42,7 @@ class CategoryController extends Controller
 
 
 
-        return view('admin._tableCategory', ['data' => $categorylist]);
+        return view('admin.category._tableCategory', ['data' => $categorylist]);
     }
 
     /**
@@ -53,7 +52,7 @@ class CategoryController extends Controller
     {
         $data = Category::all()->firstOrFail()->toArray();
 
-        return view('admin._categoryFormAdd', ['data' => $data]);
+        return view('admin.category._categoryFormAdd', ['data' => $data]);
     }
 
     /**
@@ -108,7 +107,7 @@ class CategoryController extends Controller
         $data = Category::find($id)->toArray();
 
 
-        return view('admin._categoryFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.category._categoryFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse

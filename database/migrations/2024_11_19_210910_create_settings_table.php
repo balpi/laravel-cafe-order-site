@@ -12,25 +12,25 @@ return new class extends Migration {
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id('ID')->autoIncrement();
-            $table->string('Title');
-            $table->string('Keywords');
-            $table->string('Description');
-            $table->string('Company');
-            $table->string('Adress');
-            $table->string('Phone');
-            $table->string('Email');
-            $table->string('SmtpServer');
-            $table->string('SmtpEmail');
-            $table->string('SmtpPassword');
-            $table->string('SmtpPort');
-            $table->string('Facebook');
-            $table->string('Instagram');
-            $table->string('X');
-            $table->text('AboutUs');
-            $table->text('Contact');
-            $table->text('References');
+            $table->string('Title')->nullable();
+            $table->string('Keywords')->nullable();
+            $table->string('Description')->nullable();
+            $table->string('Company')->nullable();
+            $table->string('Adress')->nullable();
+            $table->string('Phone')->nullable();
+            $table->string('Email')->nullable();
+            $table->string('SmtpServer')->nullable();
+            $table->string('SmtpEmail')->nullable();
+            $table->string('SmtpPassword')->nullable();
+            $table->string('SmtpPort')->nullable();
+            $table->string('Facebook')->nullable();
+            $table->string('Instagram')->nullable();
+            $table->string('X')->nullable();
+            $table->text('AboutUs')->nullable();
+            $table->text('Contact')->nullable();
+            $table->text('References')->nullable();
 
-            $table->boolean('Status');
+            $table->string('Status')->nullable();
 
             $table->timestamps();
         });

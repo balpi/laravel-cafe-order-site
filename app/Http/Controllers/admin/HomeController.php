@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use App\Models\Comments;
+use App\Models\Messages;
+use App\Models\Orders;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -15,7 +19,13 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view("admin.index");
+        $user = Auth::user();
+
+        $messages = Messages::where('updated_at', '>', $user->last_logged);
+        $comments = Comments::where('updated_at', '>', $user->last_logged);
+        $orders = Orders::where('updated_at', '>', $user->last_logged);
+
+        return view("admin.index", ['messages' => $messages, 'comments' => $comments, 'orders' => $orders]);
     }
     public function LoginCheck(Request $request): \Symfony\Component\HttpFoundation\RedirectResponse
     {
@@ -43,6 +53,11 @@ class HomeController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
+        User::where('id', '=', Auth::user()->id)->update(
+            [
+                'last_logged' => Carbon::now()
+            ]
+        );
         Auth::logout();
 
         $request->session()->invalidate();

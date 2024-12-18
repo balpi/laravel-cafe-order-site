@@ -1,4 +1,4 @@
-@if (isset($alert) and $alert == 'alert')
+@if (str_contains(url()->current(), 'alert'))
     <div class="alert alert-success alert-dismissible fade show" id="alertdiv" role="alert">
 
         <strong>{{ Auth::user()->email }}</strong> Record Updated
@@ -51,22 +51,23 @@
                 @endif
             @else
                 @if (str_contains($cat, 'Category_ID'))
-                    <select class="form-select" id="{{ $cat }}" name="{{ $cat }}">
+                    <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
+                        aria-label="Default select example">
                         <option selected></option>
 
                         @foreach ($dataCategory as $dataCat)
-                            <option {{-- {{ $value === $dataCat->Id ? 'selected' : '' }}  --}}value="{{ $dataCat->Id }}">
+                            <option {{ $value === $dataCat->ID ? 'selected' : '' }} value="{{ $dataCat->ID }}">
                                 {{ $dataCat->Title }}</option>
                         @endforeach
                     </select>
                 @elseif (str_contains($cat, 'User_ID'))
                     <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
                         aria-label="Default select example">
-                        <option></option>
+                        <option selected></option>
 
 
                         @foreach ($dataUser as $dataUserEx)
-                            <option {{ $value === $dataCat->Id ? 'selected' : '' }} value="{{ $dataUserEx->id }}">
+                            <option {{ $value === $dataUserEx->id ? 'selected' : '' }} value="{{ $dataUserEx->id }}">
                                 {{ $dataUserEx->name }}</option>
                         @endforeach
                     </select>
@@ -87,19 +88,17 @@
                 @else
                     <input value="{{ $value }}" class="form-control" name="{{ $cat }}"
                         id="{{ $cat }}" aria-describedby="emailHelp">
-
-
-                    @if ($loop->first)
-                        <script>
-                            var element = document.getElementById("{{ $cat }}");
-                            element.classList.add("d-none")
-                            var element2 = document.getElementById("labelfor{{ $cat }}");
-                            element2.classList.add("d-none")
-                        </script>
-                    @endif
                 @endif
             @endif
         </div>
+        @if ($loop->first)
+            <script>
+                var element = document.getElementById("{{ $cat }}");
+                element.classList.add("d-none")
+                var element2 = document.getElementById("labelfor{{ $cat }}");
+                element2.classList.add("d-none")
+            </script>
+        @endif
     @endforeach
     <button type="submit" class="btn btn-primary">Update</button>
     <button type="button" class="btn btn-secondary" @yield('cancel_route')>Cancel</button>

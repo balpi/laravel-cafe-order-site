@@ -19,4 +19,15 @@ class Category extends Model
         'updated_at',
         'created_at'
     ];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'ID', 'Category_ID');
+
+    }
+    public function maincategory()
+    {
+        return $this->belongsTo(maincategory::class, 'Category_ID', 'ID');
+
+    }
 }

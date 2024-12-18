@@ -40,7 +40,7 @@ class CommentController extends Controller
 
 
 
-        return view('admin._tableComments', ['data' => $categorylist]);
+        return view('admin.comment._tableComments', ['data' => $categorylist]);
     }
 
     /**
@@ -55,7 +55,7 @@ class CommentController extends Controller
             $data = ['Name', 'Error'];
         }
 
-        return view('admin._commentFormAdd', ['data' => $data]);
+        return view('admin.comment._commentFormAdd', ['data' => $data]);
     }
 
     /**
@@ -108,7 +108,7 @@ class CommentController extends Controller
         $data = Comments::find($id)->toArray();
 
 
-        return view('admin._commentsFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.comment._commentsFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse

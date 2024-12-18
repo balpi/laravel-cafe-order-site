@@ -7,6 +7,7 @@
     </header>
 
     <div class="tm-paging-links">
+
         @foreach ($maincategory as $maincat)
             <div class="btn-group">
                 <button type="button" class="btn  btn-danger">{{ $maincat->Title }}</button>

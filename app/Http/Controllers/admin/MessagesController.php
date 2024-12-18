@@ -43,7 +43,7 @@ class MessagesController extends Controller
 
 
 
-        return view('admin._tableMessages', ['data' => $categorylist]);
+        return view('admin.messages._tableMessages', ['data' => $categorylist]);
     }
 
     /**
@@ -58,7 +58,7 @@ class MessagesController extends Controller
             $data = ['Name', 'Error'];
         }
 
-        return view('admin._messageFormAdd', ['data' => $data]);
+        return view('admin.messages._messageFormAdd', ['data' => $data]);
     }
 
     /**
@@ -116,7 +116,7 @@ class MessagesController extends Controller
         $data = Messages::find($id)->toArray();
 
 
-        return view('admin._messagesFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.messages._messagesFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse
@@ -148,6 +148,6 @@ class MessagesController extends Controller
     public function destroy(messages $category, $id)
     {
         Messages::where('ID', '=', $id)->delete();
-        return redirect('admin/faq/?alert=alertDel');
+        return redirect('admin/messages/?alert=alertDel');
     }
 }

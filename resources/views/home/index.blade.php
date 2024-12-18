@@ -1,9 +1,8 @@
 @extends('layouts.home')
 
-@section('title', 'yeni sayfa')
+@section('title')
+    {{ $setting->Title }}
+@endsection
 
 @section('content')
-
-
-
 @endsection

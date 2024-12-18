@@ -9,6 +9,7 @@
     <th>Description</th>
     <th>CategoryID</th>
     <th>Image</th>
+    <th>Add İmages</th>
     <th>Status</th>
     <th>Create Date</th>
     <th>Last Update</th>
@@ -25,19 +26,28 @@
             <td>{{ $cat->Title }}</td>
             <td>{{ $cat->Keywords }}</td>
             <td>{{ $cat->Description }}</td>
-            <td>{{ $cat->Category_ID }}</td>
+            <td>{{ $cat->category->ID }}</td>
             <td>
+
                 @if ($cat->Image)
                     <img class="img-fluid img-thumbnail" src="{{ Storage::url($cat->Image) }}" alt="">
+                @endif
             </td>
-    @endif
+            <td>
 
-    <td>{{ $cat->Status }}</td>
+                <a class="nav-item d-inline-flex text-decoration-none rounded"
+                    href="{{ route('admin_images_add', ['id' => $cat->ID]) }}">
+                    <i class="fa-solid fa-upload fa-3x"></i>Add Image
+                </a>
+            </td>
 
-    <td class="center">{{ $cat->created_at }}</td>
-    <td class="center">{{ $cat->updated_at }}</td>
-    <td class="center">{{ $cat->mainName }}</td>
-    </tr>
+
+            <td>{{ $cat->Status }}</td>
+
+            <td class="center">{{ $cat->created_at }}</td>
+            <td class="center">{{ $cat->updated_at }}</td>
+            <td class="center">{{ $cat->category->Title }}</td>
+        </tr>
     @endforeach
 @endsection
 

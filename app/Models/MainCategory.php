@@ -15,4 +15,10 @@ class maincategory extends Model
         'updated_at',
         'created_at'
     ];
+
+    public function category()
+    {
+        return $this->hasMany(Category::class, 'ID', 'maincategories_ID');
+
+    }
 }

@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ImageController;
 use App\Http\Controllers\admin\MaincategoryController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\OrdersController;
@@ -119,6 +121,26 @@ Route::middleware('auth')->prefix('admin/messages')->group(function () {
 
 });
 
+
+Route::middleware('auth')->prefix('admin/images')->group(function () {
+
+
+
+    Route::get('add/{id?}', [ImageController::class, "create"])->name('admin_images_add');
+    Route::post('store/{id?}{image?}', [ImageController::class, "store"])->name('admin_images_store');
+    Route::get('find/{id?}/{alert?}/', [ImageController::class, "find"])->name('admin_images_find');
+    Route::get('remove/{id?}/{pid?}', [ImageController::class, "destroy"])->name('admin_images_remove');
+
+
+});
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+
+    Route::get('settings', [SettingsController::class, "index"])->name('admin_setting_get');
+    Route::post('settings/update', [SettingsController::class, "store"])->name('admin_setting_update');
+
+
+});
 
 route::get("/home", [HomeController::class, "index"]);
 

@@ -47,7 +47,7 @@ class MaincategoryController extends Controller
 
 
 
-        return view('admin._tableMaincategory', ['data' => $categorylist]);
+        return view('admin.maincategory._tableMaincategory', ['data' => $categorylist]);
     }
 
     /**
@@ -57,7 +57,7 @@ class MaincategoryController extends Controller
     {
         $data = maincategory::all()->firstOrFail()->toArray();
 
-        return view('admin._maincategoryFormAdd', ['data' => $data]);
+        return view('admin.maincategory._maincategoryFormAdd', ['data' => $data]);
     }
 
     /**
@@ -98,7 +98,7 @@ class MaincategoryController extends Controller
         error_log('FIND IS WORKING');
         $data = maincategory::find($id)->toArray();
 
-        return view('admin._maincategoryFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.maincategory._maincategoryFormUpdate', ['data' => $data, 'alert' => $alert]);
     }
 
     /**

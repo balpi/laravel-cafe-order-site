@@ -21,12 +21,14 @@
                 <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success">Update</button>
                 <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger">Remove</button>
             </td>
-            <td>{{ $cat->name }}</td>
-            <td>{{ $cat->email }}</td>
-            <td>{{ $cat->phone }}</td>
-            <td>{{ $cat->subject }}</td>
-            <td>{{ $cat->message }}</td>
-            <td>{{ $cat->ip }}</td>
+            <td>{{ $cat->Name }}</td>
+            <td>{{ $cat->Email }}</td>
+            <td>{{ $cat->Phone }}</td>
+            <td>{{ $cat->Subject }}</td>
+            <td>{{ $cat->Message }}</td>
+            <td>{{ $cat->IP }}</td>
+            <td>{{ $cat->updated_at }}</td>
+            <td>{{ $cat->created_at }}</td>
 
             <td class="center">{{ $cat->created_at }}</td>
             <td class="center">{{ $cat->updated_at }}</td>

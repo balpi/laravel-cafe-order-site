@@ -42,7 +42,7 @@ class FaqsController extends Controller
 
 
 
-        return view('admin._tableFaqs', ['data' => $categorylist]);
+        return view('admin.faqs._tableFaqs', ['data' => $categorylist]);
     }
 
     /**
@@ -57,7 +57,7 @@ class FaqsController extends Controller
             $data = ['Name', 'Error'];
         }
 
-        return view('admin._faqFormAdd', ['data' => $data]);
+        return view('admin.faqs._faqFormAdd', ['data' => $data]);
     }
 
     /**
@@ -110,7 +110,7 @@ class FaqsController extends Controller
         $data = Faqs::find($id)->toArray();
 
 
-        return view('admin._categoryFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.faqs._categoryFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse

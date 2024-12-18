@@ -10,6 +10,7 @@
                     <a class="nav-link" href="{{ route('admin') }}"><i class="fa fa-dashboard fa-3x"></i>
                         Dashboard</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin_users') }}"><i class="fa fa-user fa-3x"></i>
                         Users</a>

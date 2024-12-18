@@ -1,23 +1,26 @@
 <div id="page-inner">
     <div class="row">
         <div class="col-md-12">
-            <h2>Admin Dashboard</h2>
-            <h5>Welcome Jhon Deo , Love to see you back. </h5>
+            <h2>{{ Auth::user()->name }}</h2>
+            <h5>Welcome {{ Auth::user()->name }} , Love to see you back. </h5>
         </div>
     </div>
     <!-- /. ROW  -->
     <hr />
     <div class="row">
+
         <div class="col-md-3 col-sm-6 col-xs-6">
-            <div class="panel panel-back noti-box">
-                <span class="icon-box bg-color-red set-icon">
-                    <i class="fa fa-envelope-o"></i>
-                </span>
-                <div class="text-box">
-                    <p class="main-text">120 New</p>
-                    <p class="text-muted">Messages</p>
+            <a class="nav-link" href="{{ route('admin_messages', ['data' => $messages]) }}">
+                <div class="panel panel-back noti-box">
+                    <span class="icon-box bg-color-red set-icon">
+                        <i class="fa fa-envelope-o"></i>
+                    </span>
+                    <div class="text-box">
+                        <p class="main-text">{{ $messages->count() }} New</p>
+                        <p class="text-muted">Messages</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-6">
             <div class="panel panel-back noti-box">
@@ -36,8 +39,8 @@
                     <i class="fa fa-bell-o"></i>
                 </span>
                 <div class="text-box">
-                    <p class="main-text">240 New</p>
-                    <p class="text-muted">Notifications</p>
+                    <p class="main-text">{{ $comments->count() }} New</p>
+                    <p class="text-muted">Comments</p>
                 </div>
             </div>
         </div>
@@ -47,7 +50,7 @@
                     <i class="fa fa-rocket"></i>
                 </span>
                 <div class="text-box">
-                    <p class="main-text">3 Orders</p>
+                    <p class="main-text">{{ $orders->count() }} Orders</p>
                     <p class="text-muted">Pending</p>
                 </div>
             </div>
