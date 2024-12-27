@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\HomeController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\FaqsController;
 use App\Http\Controllers\admin\MessagesController;
 use App\Http\Controllers\admin\CommentController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -108,13 +110,13 @@ Route::middleware('auth')->prefix('admin/comments')->group(function () {
 
 });
 
-Route::middleware('auth')->prefix('admin/messages')->group(function () {
+Route::middleware('auth')->prefix('admin')->group(function () {
 
 
-    Route::get('{items?}/{search?}/{alert?}', [MessagesController::class, "index"])->name('admin_messages');
-    Route::get('add', [MessagesController::class, "create"])->name('admin_messages_add');
+    Route::get('messages/{items?}/{search?}/{alert?}', [MessagesController::class, "index"])->name('admin_messages');
+    Route::get('message/add', [MessagesController::class, "create"])->name('admin_messages_add');
     Route::post('store', [MessagesController::class, "store"])->name('admin_messages_store');
-    Route::get('find/{id?}/{alert?}/', [MessagesController::class, "find"])->name('admin_messages_find');
+    Route::get('message/find/{id?}/{alert?}/', [MessagesController::class, "find"])->name('admin_messages_find');
     Route::post('update', [MessagesController::class, "update"])->name('admin_messages_update');
     Route::get('remove/{id?}', [MessagesController::class, "destroy"])->name('admin_messages_remove');
 
@@ -142,10 +144,47 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
 });
 
-route::get("/home", [HomeController::class, "index"]);
+Route::middleware('auth')->group(function () {
+
+    Route::get('myaccount', [UserController::class, "myaccount"])->name('myaccount');
+    Route::get('slider', [\App\Http\Controllers\admin\HomeController::class, "sliderControl"])->name('admin_slider');
+    Route::get('slider/add/{id}', [\App\Http\Controllers\admin\HomeController::class, "sliderAdd"])->name('admin_slider_add');
+    Route::get('slider/delete/{id?}', [\App\Http\Controllers\admin\HomeController::class, "sliderDelete"])->name('admin_slider_remove');
+    Route::post('slider/update/{id?}', [\App\Http\Controllers\admin\HomeController::class, "sliderUpdate"])->name('admin_slider_update');
+
+});
+Route::middleware('auth')->prefix('order')->group(function () {
+
+
+    Route::get('/', [OrderController::class, "index"])->name('orders');
+    Route::get('add', [OrderController::class, "create"])->name('order_add');
+    Route::post('store', [OrderController::class, "store"])->name('order_store');
+    Route::get('find/{id?}/{alert?}', [OrderController::class, "find"])->name('order_find');
+    Route::post('update', [OrderController::class, "update"])->name('order_update');
+    Route::get('remove/{id?}', [OrderController::class, "destroy"])->name('order_remove');
+
+
+});
+
+
+route::get("/home", [HomeController::class, "index"])->name('home');
+route::get("/about", [HomeController::class, "about"])->name('about');
+route::get("/contact", [HomeController::class, "contact"])->name('contact');
+route::post("/contact/sendmessage", [HomeController::class, "sendMessage"])->name('sendmessage');
+route::get("/detail/{id}", [HomeController::class, "product"])->name('detail');
+route::get("/search", [HomeController::class, "getProduct"])->name('getProduct');
+route::get("/procucts/{categoryID}", [HomeController::class, "procuctsforCategory"])->name('procuctsforCategory');
 
 
 
+/* Shopping */
+route::get("/cart", [HomeController::class, "addCart"])->name('cart');
+route::get("/showcart", [HomeController::class, "showCart"])->name('showcart');
+route::get("/removeitem/{id}", [HomeController::class, "removeCartItem"])->name('removeCartItem');
+
+//route::get("/cart", [HomeController::class, "addCart"])->name('getcart');
+
+Route::get("/faqs", [HomeController::class, "faqs"])->name('home_faqs');
 
 route::post("/admin/LoginCheck", [App\Http\Controllers\admin\HomeController::class, "LoginCheck"])
     ->name("LoginCheck");
@@ -153,12 +192,25 @@ route::post("/admin/LoginCheck", [App\Http\Controllers\admin\HomeController::cla
 
 route::get("/login", [LoginController::class, "index"])->name('login');
 
+route::get("/foriframe", function () {
+    return view('home._blankpageForIframe');
+})->name('iframeBlank');
 
 
 route::post('/', [App\Http\Controllers\admin\HomeController::class, "logout"])->name("Logout");
-route::get('/', function () {
+
+route::post('/logout', [\App\Http\Controllers\admin\HomeController::class, "logout"])->name('logout');
+Route::get('/', function () {
     return view('welcome');
 });
-route::post('/logout', [\App\Http\Controllers\admin\HomeController::class, "logout"])->name('logout');
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/', function () {
+        return view('home.index');
+    })->name('dashboard');
+});
 

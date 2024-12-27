@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class maincategory extends Model
 {
@@ -16,9 +17,9 @@ class maincategory extends Model
         'created_at'
     ];
 
-    public function category()
+    public function category(): HasMany
     {
-        return $this->hasMany(Category::class, 'ID', 'maincategories_ID');
+        return $this->hasMany(Category::class, 'maincategories_ID', 'ID');
 
     }
 }

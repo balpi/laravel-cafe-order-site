@@ -27,14 +27,19 @@
                         @endforeach
                     </select>
                 @elseif (str_contains($cat, 'User_ID'))
-                    <select class="form-select" aria-label="Default select example" name="{{ $cat }}">
-                        <option selected></option>
+                    @if (isset($dataUser))
+                        <select class="form-select" aria-label="Default select example" name="{{ $cat }}">
+                            <option selected></option>
 
-                        @foreach ($dataUser as $dataUserEx)
-                            <option value="{{ $dataUserEx->id }}">{{ $dataUserEx->name }}
-                            </option>
-                        @endforeach
-                    </select>
+                            @foreach ($dataUser as $dataUserEx)
+                                <option value="{{ $dataUserEx->id }}">{{ $dataUserEx->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    @else
+                        <input class="form-control" name="{{ $cat }}" id="{{ $cat }}"
+                            aria-describedby="emailHelp">
+                    @endif
                 @elseif($cat == 'Image')
                     <input type="file" class="form-control" name="{{ $cat }}" id="{{ $cat }}">
                 @elseif ($cat == 'Description')
@@ -61,29 +66,34 @@
                         @endforeach
                     </select>
                 @elseif (str_contains($cat, 'User_ID'))
-                    <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
-                        aria-label="Default select example">
-                        <option selected></option>
+                    @if ($dataUser)
+                        <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
+                            aria-label="Default select example">
+                            <option selected></option>
 
-
-                        @foreach ($dataUser as $dataUserEx)
-                            <option {{ $value === $dataUserEx->id ? 'selected' : '' }} value="{{ $dataUserEx->id }}">
-                                {{ $dataUserEx->name }}</option>
-                        @endforeach
-                    </select>
+                            @foreach ($dataUser as $dataUserEx)
+                                <option {{ $value === $dataUserEx->id ? 'selected' : '' }}
+                                    value="{{ $dataUserEx->id }}">
+                                    {{ $dataUserEx->name }}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <input value="{{ $value }}" class="form-control" name="{{ $cat }}"
+                            id="{{ $cat }}" aria-describedby="emailHelp">
+                    @endif
                 @elseif ($cat == 'Image')
                     <input value="{{ $value }}" title="{{ $value }}" type="file" class="form-control"
                         name="{{ $cat }}" id="{{ $cat }}">
                     <script>
                         document.getElementById("labelfor{{ $cat }}").innerText = "{{ $value }}"
                     </script>
-                @elseif ($cat == 'Description')
-                    <textarea class="ckeditor" name="Description" id="Description" rows="10">{{ $value }}</textarea>
+                @elseif ($cat == 'Description' or $cat == 'AboutUs' or $cat == 'Contact')
+                    <textarea class="ckeditor" name="{{ $cat }}" id="{{ $cat }}" rows="10">{{ $value }}</textarea>
                 @elseif (str_contains($cat, 'tatus'))
                     <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
                         aria-label="Default select example">
-                        <option {{ $value === 'Active' ? 'selected' : '' }}>Active</option>
-                        <option {{ $value === 'Active' ? 'selected' : '' }}>Passive</option>
+                        <option {{ $value === 'Readed' ? 'selected' : '' }}>Readed</option>
+                        <option {{ $value === 'Pending' ? 'selected' : '' }}>Pending</option>
                     </select>
                 @else
                     <input value="{{ $value }}" class="form-control" name="{{ $cat }}"
@@ -103,3 +113,30 @@
     <button type="submit" class="btn btn-primary">Update</button>
     <button type="button" class="btn btn-secondary" @yield('cancel_route')>Cancel</button>
 </form>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.getElementById("Description"))
+        .catch(error => {
+            console.error(error);
+        });
+    CKEDITOR.replace('Description');
+</script>
+
+<script>
+    ClassicEditor
+        .create(document.getElementById('AboutUs'))
+        .catch(error => {
+            console.error(error);
+        });
+    CKEDITOR.replace('AboutUs');
+</script>
+
+<script>
+    ClassicEditor
+        .create(document.getElementById('Contact'))
+        .catch(error => {
+            console.error(error);
+        });
+    CKEDITOR.replace('Contact');
+</script>

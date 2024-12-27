@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->foreign('User_ID')
                 ->references('ID')
                 ->on('users');
-            $table->boolean('Status');
+            $table->string('Status', 10);
             //$table->timestamp('CreateDate')->nullable();
             //$table->timestamp('UpdateDate')->nullable();
             $table->timestamps();

@@ -23,7 +23,7 @@ return new class extends Migration {
                 ->references('ID')
                 ->on('users');
             $table->string('ip');
-            $table->integer('Status');
+            $table->string('Status', 10);
             $table->timestamps();
         });
     }

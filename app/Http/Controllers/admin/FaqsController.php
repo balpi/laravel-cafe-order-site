@@ -36,7 +36,7 @@ class FaqsController extends Controller
                 ->where('Title', 'LIKE', '%' . $search . '%')
                 ->paginate($page, ['*'], 1);
         } else {
-            $categorylist = DB::table('faqs')
+            $categorylist = DB::table('faqs')->orderBy('Position', 'asc')
                 ->paginate($page, ['*'], 1);
         }
 
@@ -52,7 +52,12 @@ class FaqsController extends Controller
     {
 
         try {
-            $data = Faqs::all()->firstOrFail()->toArray();
+            $data = Faqs::first()->toArray();
+            if ($data == null) {
+                $data = DB::getSchemaBuilder()->getColumnListing('faqs');
+                $data = array_fill_keys($data, "");
+
+            }
         } catch (\Throwable $th) {
             $data = ['Name', 'Error'];
         }
@@ -70,6 +75,7 @@ class FaqsController extends Controller
         $creted = Faqs::create(
             [
                 'ID',
+                'Position' => $request->Position,
                 'Question' => $request->Question,
                 'Answer' => $request->Answer,
                 'Status' => $request->Status,
@@ -81,7 +87,7 @@ class FaqsController extends Controller
         );
 
 
-        return redirect('admin/category/find/' . $creted->id . '/alert');
+        return redirect('admin/faqs/find/' . $creted->id . '/alert');
 
     }
 
@@ -110,7 +116,7 @@ class FaqsController extends Controller
         $data = Faqs::find($id)->toArray();
 
 
-        return view('admin.faqs._categoryFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.faqs._faqFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse
@@ -119,6 +125,7 @@ class FaqsController extends Controller
         Faqs::where('ID', $request->ID)
             ->update(
                 [
+                    'Position' => $request->Position,
 
                     'Question' => $request->Question,
                     'Answer' => $request->Answer,

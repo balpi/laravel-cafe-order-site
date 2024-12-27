@@ -30,7 +30,12 @@ class User extends Authenticatable
         'email',
         'password',
         'User_Role',
-        'last_logged',
+        'Adress',
+        'Phone',
+        'Status',
+        'updated_at',
+        'created_at',
+        'profile_photo_path'
     ];
 
     /**
@@ -68,7 +73,7 @@ class User extends Authenticatable
     }
     public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'User_ID', 'ID');
 
     }
 }

@@ -3,6 +3,8 @@
 
 
 @section('table_th')
+    <th>Procces</th>
+    <th>Position</th>
     <th>Question</th>
     <th>Answer</th>
     <th>Status</th>
@@ -17,8 +19,9 @@
                 <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success">Update</button>
                 <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger">Remove</button>
             </td>
+            <td>{{ $cat->Position }}</td>
             <td>{{ $cat->Question }}</td>
-            <td>{{ $cat->answer }}</td>
+            <td>{{ $cat->Answer }}</td>
 
             <td>{{ $cat->Status }}</td>
 

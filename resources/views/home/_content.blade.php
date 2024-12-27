@@ -1,292 +1,166 @@
-<main>
-    <header class="row tm-welcome-section">
-        <h2 class="col-12 text-center tm-section-title">Welcome to Simple House</h2>
-        <p class="col-12 text-center">Total 3 HTML pages are included in this template. Header image has a parallax
-            effect. You can feel free to download, edit and use this TemplateMo layout for your commercial or
-            non-commercial websites.</p>
-    </header>
-
-    <div class="tm-paging-links">
-
-        @foreach ($maincategory as $maincat)
-            <div class="btn-group">
-                <button type="button" class="btn  btn-danger">{{ $maincat->Title }}</button>
-                <button type="button" style="height:auto" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="sr-only"></span>
-                </button>
-
-                <div class="dropdown-menu dropdown-menu-lg-start">
-
-                    @foreach ($category->where('maincategories_ID', $maincat->ID) as $cat)
-                        <a class="dropdown-item" href="#">{{ $cat->Title }}</a>
-                    @endforeach
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">{{ $maincat->Title }} All</a>
-
-                </div>
-
-
-
-            </div>
-        @endforeach
-
-
-
-    </div>
-
-    <!-- Gallery -->
-    <div class="row tm-gallery">
-        <!-- gallery page 1 -->
-        <div id="tm-gallery-page-pizza" class="tm-gallery-page">
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Fusce dictum finibus</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$45 / $55</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/02.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Aliquam sagittis</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$65 / $70</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Sed varius turpis</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$30.50</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Aliquam sagittis</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$25.50</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Maecenas eget justo</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$80.25</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/06.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Quisque et felis eros</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$20 / $40 / $60</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Sed ultricies dui</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$94</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Donec porta consequat</h4>
-                        <p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet
-                            tellus accumsan</p>
-                        <p class="tm-gallery-price">$15</p>
-                    </figcaption>
-                </figure>
-            </article>
-        </div> <!-- gallery page 1 -->
-
-        <!-- gallery page 2 -->
-        <div id="tm-gallery-page-salad" class="tm-gallery-page hidden">
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Salad Menu One</h4>
-                        <p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc.
-                            Vestibulum tristique</p>
-                        <p class="tm-gallery-price">$25</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Second Title Salad</h4>
-                        <p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc.
-                            Vestibulum tristique</p>
-                        <p class="tm-gallery-price">$30</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Third Salad Item</h4>
-                        <p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc.
-                            Vestibulum tristique</p>
-                        <p class="tm-gallery-price">$45</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Superior Salad</h4>
-                        <p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc.
-                            Vestibulum tristique</p>
-                        <p class="tm-gallery-price">$50</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Sed ultricies dui</h4>
-                        <p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc.
-                            Vestibulum tristique</p>
-                        <p class="tm-gallery-price">$55 / $60</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Maecenas eget justo</h4>
-                        <p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc.
-                            Vestibulum tristique</p>
-                        <p class="tm-gallery-price">$75</p>
-                    </figcaption>
-                </figure>
-            </article>
-        </div> <!-- gallery page 2 -->
-
-        <!-- gallery page 3 -->
-        <div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Noodle One</h4>
-                        <p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur ridiculus mus.</p>
-                        <p class="tm-gallery-price">$12.50</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Noodle Second</h4>
-                        <p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur ridiculus mus.</p>
-                        <p class="tm-gallery-price">$15.50</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/06.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Third Soft Noodle</h4>
-                        <p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur ridiculus mus.</p>
-                        <p class="tm-gallery-price">$20.50</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Aliquam sagittis</h4>
-                        <p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur ridiculus mus.</p>
-                        <p class="tm-gallery-price">$30.25</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Maecenas eget justo</h4>
-                        <p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur ridiculus mus.</p>
-                        <p class="tm-gallery-price">$35.50</p>
-                    </figcaption>
-                </figure>
-            </article>
-            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-                <figure>
-                    <img src="img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-                    <figcaption>
-                        <h4 class="tm-gallery-title">Quisque et felis eros</h4>
-                        <p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur ridiculus mus.</p>
-                        <p class="tm-gallery-price">$40.50</p>
-                    </figcaption>
-                </figure>
-            </article>
-
-        </div> <!-- gallery page 3 -->
-    </div>
-    <div class="tm-section tm-container-inner">
-        <div class="row">
-            <div class="col-md-6">
-                <figure class="tm-description-figure">
-                    <img src="img/img-01.jpg" alt="Image" class="img-fluid" />
-                </figure>
-            </div>
-            <div class="col-md-6">
-                <div class="tm-description-box">
-                    <h4 class="tm-gallery-title">Maecenas nulla neque</h4>
-                    <p class="tm-mb-45">Redistributing this template as a downloadable ZIP file on any template
-                        collection site is strictly prohibited. You will need to <a rel="nofollow"
-                            href="https://templatemo.com/contact">talk to us</a> for additional permissions about our
-                        templates. Thank you.</p>
-                    <a href="about.html" class="tm-btn tm-btn-default tm-right">Read More</a>
+<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h1 class="font-secondary text-primary mb-4">Super Crispy</h1>
+                <h1 class="display-1 text-uppercase text-white mb-4">CakeZone</h1>
+                <h1 class="text-uppercase text-white">The Best Cake In London</h1>
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    <a href="{{ route('about') }}" class="btn btn-primary border-inner py-3 px-5 me-5">Read More</a>
+                    <button type="button" class="btn-play" data-bs-toggle="modal"
+                        data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                        <span></span>
+                    </button>
+                    <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>
+<!-- Hero End -->
+
+<!-- Slider Start -->
+
+@include('home._slider')
+
+<!-- Slider End -->
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-dark bg-img p-5 mb-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-uppercase text-white">Menu & Pricing</h1>
+
+            @guest
+                <a href="">Home</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="">Menu & Pricing</a>
+            @endguest
+
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+
+
+<!-- Products Start -->
+<div class="container-fluid about py-5">
+    <div class="container">
+
+        <!-- Şefin Tavsiyesi Start -->
+
+        <div class="container">
+            <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+                <h2 class="text-primary font-secondary">Chefs Recomend</h2>
+                <h1 class="display-4 text-uppercase">Advantage Menus</h1>
+            </div>
+            <div class="text-center">
+                <div class="row g-3">
+                    @foreach ($products as $chefs)
+                        <div class="col-lg-4">
+                            <div class="card border-0">
+                                <a href="{{ route('detail', ['id' => $chefs->ID]) }}">
+                                    <img src="{{ Storage::url($chefs->Image) }}" class="card-img-top" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase">{{ $chefs->Title }}</h5>
+
+                                    <a href="" class="btn btn-primary border-inner py-3 px-5">Order Now</a>
+                                    <a href="{{ route('cart', ['product_id' => $chefs->ID]) }}"
+                                        class="btn btn-primary border-inner py-3 px-5">AddCart</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <!-- Şefin Tavsiyesi End -->
+
+
+
+
+
+
+            <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+                <h2 class="text-primary font-secondary">Menu & Pricing</h2>
+                <h1 class="display-4 text-uppercase">Explore and Order Our Delicious Products</h1>
+            </div>
+
+
+            <div class="tab-class text-center">
+                <ul
+                    class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase border-inner p-4 mb-5">
+
+                    @foreach ($categories as $maincat)
+                        <li class="nav-item">
+                            @if ($loop->first)
+                                <a class="nav-link text-white active" data-bs-toggle="pill"
+                                    href="#tab-{{ $maincat->ID }}">{{ $maincat->Title }}</a>
+                            @else
+                                <a class="nav-link text-white" data-bs-toggle="pill"
+                                    href="#tab-{{ $maincat->ID }}">{{ $maincat->Title }}</a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+                <div class="tab-content">
+                    @foreach ($categories as $category)
+                        <div id="tab-{{ $maincat->ID }}" class="tab-pane fade show p-0 active">
+                            <div class="row g-3">
+
+                                @foreach ($category->product as $product)
+                                    <div class="col-lg-6">
+                                        <div class="d-flex h-100">
+                                            <div class="flex-shrink-0">
+                                                <a href="{{ route('detail', ['id' => $product->ID]) }}">
+                                                    <img class="img-fluid" src="{{ Storage::url($product->Image) }}"
+                                                        alt="" style="width: 150px; height: 85px;">
+                                                    <h4 class="bg-dark text-primary p-2 m-0">{{ $product->Price }}</h4>
+                                                </a>
+                                                <div class="d-flex h-100">
+                                                    <div class="col-6 text-center">
+                                                        <a href="{{ route('admin_orders', ['id' => $product->ID]) }}"
+                                                            class="btn btn-primary border-inner py-3 px-5 mt-3">
+                                                            <i class="fa fa-credit-card fa-1x"></i><br>
+                                                            Order</a>
+                                                    </div>
+
+                                                    <div class="col-6 text-center">
+                                                        <a href="{{ route('cart', ['product_id' => $product->ID]) }}"
+                                                            class="btn btn-primary border-inner py-3 px-5 mt-3">
+                                                            <i class="fa fa-shopping-cart fa-1x"></i><br>
+                                                            Cart</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
+                                                <h5 class="text-uppercase">{{ $product->Title }}</h5>
+                                                <span>
+                                                    @php
+                                                        echo html_entity_decode($product->Description);
+                                                    @endphp
+                                                </span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products End -->
+</div>

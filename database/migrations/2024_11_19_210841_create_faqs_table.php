@@ -12,9 +12,10 @@ return new class extends Migration {
     {
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
+            $table->integer('Position');
             $table->string('Question');
-            $table->string('answer');
-            $table->smallInteger('Status');
+            $table->string('Answer');
+            $table->string('Status', 10);
 
             $table->timestamps();
         });

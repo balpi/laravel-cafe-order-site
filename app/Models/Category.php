@@ -22,12 +22,12 @@ class Category extends Model
 
     public function product()
     {
-        return $this->hasMany(Product::class, 'ID', 'Category_ID');
+        return $this->hasMany(Product::class, 'Category_ID', 'ID');
 
     }
     public function maincategory()
     {
-        return $this->belongsTo(maincategory::class, 'Category_ID', 'ID');
+        return $this->belongsTo(maincategory::class, 'maincategories_ID', 'ID');
 
     }
 }

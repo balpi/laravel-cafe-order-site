@@ -73,6 +73,9 @@ class SettingsController extends Controller
             ]
 
         );
+        foreach ($request->all() as $key => $value) {
+            error_log('message burada :  ----' . $key . ' : ' . $value);
+        }
 
         return redirect(route('admin_setting_get'));
     }

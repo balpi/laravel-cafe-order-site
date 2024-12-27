@@ -14,10 +14,10 @@ return new class extends Migration {
             $table->id('ID');
             $table->unsignedBigInteger('User_ID');
             $table->foreign('User_ID')
-                ->references('id')->on('users')->cascadeOnDelete();
+                ->references('id')->on('users');
             $table->integer('TableNo');
             $table->decimal('Total');
-            $table->smallInteger('Status');
+            $table->string('Status', 10);
             $table->string('Note');
             $table->string('IP');
             //$table->timestamp('Created_at')->nullable();
@@ -33,8 +33,6 @@ return new class extends Migration {
     {
 
         Schema::dropIfExists('orders');
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('created_at');
-        });
+
     }
 };

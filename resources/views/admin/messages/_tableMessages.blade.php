@@ -3,6 +3,7 @@
 
 
 @section('table_th')
+    <th>Actions</th>
     <th> name</th>
     <th>email</th>
     <th>phone</th>
@@ -12,13 +13,14 @@
     <th>status</th>
     <th>created_at</th>
     <th>updated_at</th>
+    <th>Admin Note</th>
 @endsection
 
 @section('table_tbody')
     @foreach ($data as $cat)
         <tr class="@if ($loop->odd) odd gradeX  @else even gradeC @endif">
             <td>
-                <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success">Update</button>
+                <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success">Answer</button>
                 <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger">Remove</button>
             </td>
             <td>{{ $cat->Name }}</td>
@@ -27,11 +29,11 @@
             <td>{{ $cat->Subject }}</td>
             <td>{{ $cat->Message }}</td>
             <td>{{ $cat->IP }}</td>
+            <td>{{ $cat->Status }}</td>
             <td>{{ $cat->updated_at }}</td>
             <td>{{ $cat->created_at }}</td>
+            <td>{{ $cat->Note }}</td>
 
-            <td class="center">{{ $cat->created_at }}</td>
-            <td class="center">{{ $cat->updated_at }}</td>
         </tr>
     @endforeach
 @endsection

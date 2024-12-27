@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->id('ID')->autoIncrement()->primary();
             $table->string('Title');
             $table->unsignedBigInteger('Products_ID');
-            $table->foreign('Products_ID')->references('id')->on('products');
+            $table->foreign('Products_ID')->references('id')
+                ->on('products')->onDelete('cascade');
 
             $table->json('Image')->nullable();
             $table->timestamps();

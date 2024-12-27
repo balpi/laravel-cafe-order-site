@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('Keywords');
             $table->string('Description');
             $table->string('Image');
-            $table->boolean('Status');
+            $table->string('Status', 10);
 
 
             $table->foreignId('maincategories_ID')->constrained('maincategories')->references('ID');

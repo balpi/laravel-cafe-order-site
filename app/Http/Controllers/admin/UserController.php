@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\maincategory;
+use App\Models\Product;
+use App\Models\Settings;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProductRequest;
@@ -13,6 +17,24 @@ use Str;
 
 class UserController extends Controller
 {
+
+    public function myaccount()
+    {
+        $setting = Settings::first();
+        $maincategories = maincategory::all();
+        $product = Product::all();
+        $myaccount = User::where('id', '=', Auth::user()->id)->first()->toArray();
+        return view(
+            'home.userProfile',
+            [
+                'setting' => $setting,
+                'maincategory' => $maincategories,
+                'products' => $product,
+                'myaccount' => $myaccount
+            ]
+        );
+
+    }
     /**
      * Display a listing of the resource.
      */

@@ -3,7 +3,15 @@
         <div class="sidebar-collapse sidebar-sticky">
             <ul class="nav flex-column" id="">
                 <li class="text-center">
-                    <img src="{{ asset('assets') }}/img/find_user.png" class="user-image" />
+
+                    @if (Auth::user()->profile_photo_path)
+                        <img src="{{ Storage::url(Auth::user()->profile_photo_path) }}" class="user-image" />
+                    @else
+                        <img src="{{ asset('assets') }}/img/find_user.png" class="user-image" />
+                    @endif
+
+
+
                 </li>
 
                 <li class="nav-item">
@@ -14,6 +22,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin_users') }}"><i class="fa fa-user fa-3x"></i>
                         Users</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin_slider') }}"><i class="fa fa-user fa-3x"></i>
+                        SliderControl</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin_maincategory') }}"><i class="fa fa-desktop fa-3x"></i>

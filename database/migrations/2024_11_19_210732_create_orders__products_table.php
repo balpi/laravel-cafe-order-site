@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->decimal('Price');
             $table->integer('Amount');
             $table->decimal('Total');
-            $table->smallInteger('Status');
+            $table->string('Status', 10);
             $table->string('Note');
             $table->string('IP');
 

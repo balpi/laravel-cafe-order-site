@@ -55,7 +55,13 @@ class MaincategoryController extends Controller
      */
     public function create()
     {
-        $data = maincategory::all()->firstOrFail()->toArray();
+        $data = maincategory::first();
+        if ($data == null) {
+            $data = DB::getSchemaBuilder()->getColumnListing('maincategories');
+            $data = array_fill_keys($data, "");
+        } else {
+            $data = $data->toArray();
+        }
 
         return view('admin.maincategory._maincategoryFormAdd', ['data' => $data]);
     }

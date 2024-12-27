@@ -26,11 +26,11 @@ return new class extends Migration {
             $table->string('Facebook')->nullable();
             $table->string('Instagram')->nullable();
             $table->string('X')->nullable();
-            $table->text('AboutUs')->nullable();
+            $table->longText('AboutUs')->nullable();
             $table->text('Contact')->nullable();
             $table->text('References')->nullable();
 
-            $table->string('Status')->nullable();
+            $table->string('Status', 10)->nullable();
 
             $table->timestamps();
         });

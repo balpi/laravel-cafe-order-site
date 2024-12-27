@@ -78,6 +78,7 @@ class MessagesController extends Controller
                 'Subject' => $request->Subject,
                 'Message' => $request->Message,
                 'Status' => $request->Status,
+                'Note' => $request->Note,
                 'IP' => $request->IP,
 
                 'updated_at' => Carbon::now(),
@@ -116,7 +117,7 @@ class MessagesController extends Controller
         $data = Messages::find($id)->toArray();
 
 
-        return view('admin.messages._messagesFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.messages._messageFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse
@@ -133,7 +134,9 @@ class MessagesController extends Controller
                     'Message' => $request->Message,
                     'Status' => $request->Status,
                     'IP' => $request->IP,
+                    'Note' => $request->Note,
                     'updated_at' => Carbon::now()
+
                 ]
 
             );

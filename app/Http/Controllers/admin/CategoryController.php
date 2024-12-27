@@ -50,7 +50,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $data = Category::all()->firstOrFail()->toArray();
+        $data = Category::first();
+        if ($data == null) {
+            $data = DB::getSchemaBuilder()->getColumnListing('categories');
+            $data = array_fill_keys($data, "");
+        } else {
+            $data = $data->toArray();
+        }
 
         return view('admin.category._categoryFormAdd', ['data' => $data]);
     }

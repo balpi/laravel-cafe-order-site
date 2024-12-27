@@ -14,12 +14,12 @@ return new class extends Migration {
             $table->id('ID');
             $table->string('Name');
             $table->string('Email');
-            $table->string('Phone');
+            $table->string('Phone')->nullable();
             $table->string('Subject');
-            $table->string('Message');
-            $table->smallInteger('Status');
+            $table->longText('Message');
+            $table->string('Status', 10)->default('Pending');
             $table->string('IP');
-
+            $table->string('Note')->nullable();
             $table->timestamps();
         });
     }

@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Comments;
 use App\Models\Messages;
 use App\Models\Orders;
+use App\Models\Product;
+use App\Models\Slider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -21,9 +24,9 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $messages = Messages::where('updated_at', '>', $user->last_logged);
-        $comments = Comments::where('updated_at', '>', $user->last_logged);
-        $orders = Orders::where('updated_at', '>', $user->last_logged);
+        $messages = Messages::all();
+        $comments = Comments::all();
+        $orders = Orders::all();
 
         return view("admin.index", ['messages' => $messages, 'comments' => $comments, 'orders' => $orders]);
     }
@@ -37,7 +40,7 @@ class HomeController extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
 
-                return redirect()->intended('/admin')->with('useremail', session('email'));
+                return redirect()->intended('/home')->with('useremail', session('email'));
             }
 
             return back()->withErrors([
@@ -53,11 +56,7 @@ class HomeController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
-        User::where('id', '=', Auth::user()->id)->update(
-            [
-                'last_logged' => Carbon::now()
-            ]
-        );
+
         Auth::logout();
 
         $request->session()->invalidate();
@@ -66,6 +65,48 @@ class HomeController extends Controller
 
         return redirect('/home');
     }
+    public function sliderControl()
+    {
+        $data = Product::paginate(10);
+        $sliders = Slider::with('Product')->get();
 
+        foreach ($sliders as $key => $value) {
+            error_log('-------->' . $value->Product->Title . "=>");
+        }
+        return view('admin._slider', ['data' => $data, 'sliders' => $sliders]);
+    }
+    public function sliderAdd($id)
+    {
+
+
+
+        error_log('-------->' . $id . "=>");
+
+        $product = Product::find($id);
+        $slider = new Slider();
+
+        $slider->Product_ID = $product->ID;
+        $slider->Title = $product->Title;
+        $slider->Description = $product->Description;
+        $slider->updated_at = Carbon::now();
+        $slider->created_at = Carbon::now();
+        $slider->save();
+
+        return redirect()->route('admin_slider');
+    }
+    public function sliderDelete($id)
+    {
+        Slider::where('id', '=', $id)->delete();
+        return redirect()->route('admin_slider');
+    }
+    public function sliderUpdate(Request $request)
+    {
+        $slider = Slider::find($request->ID);
+        $slider->Title = $request->Title;
+        $slider->Description = $request->Description;
+        $slider->updated_at = Carbon::now();
+        $slider->save();
+        return redirect()->route('admin_slider');
+    }
 
 }

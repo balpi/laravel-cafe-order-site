@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Redirect;
+use Schema;
 use Storage;
 use Str;
 
@@ -45,6 +46,7 @@ class ProductController extends Controller
         }
 
 
+
         return view('admin.product._tableProduct', ['data' => $categorylist]);
     }
 
@@ -53,10 +55,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $data = Product::join('categories', 'products.Category_ID', '=', 'categories.ID')
-            ->join('users', 'products.User_ID', '=', 'users.ID')
-            ->select('products.*', 'users.Name as userName')->first()->toArray()
-        ;
+        $data = Product::first();
+        if ($data == null) {
+            $data = DB::getSchemaBuilder()->getColumnListing('products');
+            $data = array_fill_keys($data, "");
+        } else {
+            $data = $data->toArray();
+        }
         $dataCategory = Category::all();
         $dataUser = User::all();
         return view('admin.product._productFormAdd', [
@@ -82,7 +87,7 @@ class ProductController extends Controller
                 'Description' => $request->Description,
                 'Price' => $request->Price,
                 'Category_ID' => $request->Category_ID,
-                'User_ID ' => $request->User_ID,
+                'User_ID' => $request->User_ID,
                 'Image' => $request->file('Image')->store('storage/Images'),
                 'Status' => $request->Status,
                 'updated_at' => Carbon::now(),
