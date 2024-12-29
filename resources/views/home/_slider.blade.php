@@ -33,7 +33,7 @@
                                 <div class="card">
                                     <div class="carousel-item @if ($loop->first) active @endif">
                                         <img src="{{ Storage::url($slider->product->Image) }}" alt="Los Angeles"
-                                            class="d-block card-img-top" style="width:100%">
+                                            class="d-block card-img-top" style=" height: 300px; width:100%">
                                         <div class="carousel-caption">
                                             <h2 class="card-header">{{ $slider->Title }}</h2>
                                             <div class="card-body">

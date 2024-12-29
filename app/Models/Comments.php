@@ -28,6 +28,6 @@ class Comments extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'product_ID', 'ID');
+        return $this->belongsTo(User::class, 'user_ID', 'ID');
     }
 }

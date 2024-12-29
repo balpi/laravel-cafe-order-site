@@ -5,6 +5,7 @@
 @section('table_th')
     <th>id</th>
     <th>name</th>
+    <th>Role</th>
     <th>email</th>
     <th>email_verified_at</th>
     <th>password</th>
@@ -23,11 +24,22 @@
     @foreach ($data as $cat)
         <tr class="@if ($loop->odd) odd gradeX  @else even gradeC @endif">
             <td>
-                <button type="button" miss="Update" data-ID="{{ $cat->id }}" class="btn btn-success">Update</button>
-                <button type="button" miss="Delete" data-ID={{ $cat->id }} class="btn btn-danger">Remove</button>
+                <button type="button" miss="Update" data-ID="{{ $cat->id }}" class="btn btn-success m-1">Update</button>
+                <button type="button" miss="Delete" data-ID={{ $cat->id }} class="btn btn-danger m-1">Remove</button>
+                <form action="{{ route('MakeAdmin', ['id' => $cat->id]) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $cat->id }}">
+                    @if ($cat->roles[0]->name == 'admin')
+                        <button type="submit" class="btn btn-secondary m-1">MakeUser</button>
+                    @else
+                        <button type="submit" class="btn btn-secondary m-1">MakeAdmin</button>
+                    @endif
+
+                </form>
             </td>
-            <td class="d-hide">{{ $cat->id }}</td>
+
             <td>{{ $cat->name }}</td>
+            <td>{{ $cat->roles[0]->name }}</td>
             <td>{{ $cat->email }}</td>
             <td>{{ $cat->email_verified_at }}</td>
             <td>{{ $cat->password }}</td>

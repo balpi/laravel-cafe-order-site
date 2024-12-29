@@ -131,7 +131,7 @@
                                 @endif
                             </span>
                             My Cart</a>
-                        <a href="{{ route('showcart') }}" class="dropdown-item"><i class="fa-solid fa-clipboard-list"></i>
+                        <a href="{{ route('orders') }}" class="dropdown-item"><i class="fa-solid fa-clipboard-list"></i>
                             My Orders</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('about') }}" class="dropdown-item"><i class="fa-solid fa-shopping-cart"></i>
@@ -142,6 +142,14 @@
             @guest()
                 <a href="{{ route('login') }}" class="nav-item nav-link">Login/SignUp</a>
             @endguest
+            @auth
+                @php
+                    $userRole = Auth::user()->roles->pluck('name');
+                @endphp
+                @if ($userRole->contains('admin'))
+                    <a href="{{ route('admin') }}" class="nav-item nav-link">Admin Panel</a>
+                @endif
+            @endauth
             <div class="nav-item nav-link">
                 <div class="header-search">
                     <form action="{{ route('getProduct') }}" method="GET" class="d-flex">

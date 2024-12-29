@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\Orders_Product;
+use App\Models\Product;
 use App\Models\Settings;
 use Auth;
 use DB;
@@ -16,8 +17,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Orders::all();
+        $orders = Orders::where('User_ID', Auth::user()->id)
+            ->with('Orders_Product')->with('Orders_Product.product')->orderBy('created_at', 'desc')
+            ->get()
+        ;
         $setting = Settings::first();
+
+
         return view('home._userOrders', ['setting' => $setting, 'orders' => $orders]);
     }
     /**
@@ -31,7 +37,33 @@ class OrderController extends Controller
         $cart = session()->get('cart');
         return view('home._OrdersAdd', ['setting' => $setting, 'data' => $data, 'cart' => $cart]);
     }
+    public function orderDirect($id)
+    {
+        $productId = $id;
+        $quantity = 1;
+        $product = Product::find($productId);
 
+        if (!$product) {
+            return redirect()->back()->with('error', 'Product not found.');
+        }
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] += $quantity;
+        } else {
+            $cart[$productId] = [
+                "id" => $product->ID,
+                "name" => $product->Title,
+                "quantity" => $quantity,
+                "price" => $product->Price,
+                "image" => $product->Image
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect(route('order_add'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -69,7 +101,8 @@ class OrderController extends Controller
             ]);
         }
         session()->forget('cart');
-        return redirect()->route('orders')->with('success', 'Order created successfully.');
+        return redirect(route('orders'))->with('success', 'Order has been placed successfully');
+
     }
 
     /**

@@ -25,10 +25,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-
         if ($request->has('items')) {
             $page = $request->items;
-
         } else {
             $page = 10;
         }
@@ -42,11 +40,7 @@ class ProductController extends Controller
         } else {
 
             $categorylist = Product::paginate($page, ['*'], 1);
-
         }
-
-
-
         return view('admin.product._tableProduct', ['data' => $categorylist]);
     }
 

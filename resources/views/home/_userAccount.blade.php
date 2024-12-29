@@ -19,17 +19,17 @@
                             </li>
 
                             <li>
-                                <a href="#" class="nav-link px-0 align-middle">
+                                <a href="{{ route('orders') }}" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">My Orders</span></a>
                             </li>
                             <li>
-                                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <a href="{{ route('cart') }}" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                                     <i class="fs-4 bi-cart"></i> <span class="ms-1 d-none d-sm-inline">My Shop
                                         Basket</span></a>
 
                             </li>
                             <li>
-                                <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <a href="#" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-envelope"></i> <span class="ms-1 d-none d-sm-inline">Messages</span>
                                 </a>
 

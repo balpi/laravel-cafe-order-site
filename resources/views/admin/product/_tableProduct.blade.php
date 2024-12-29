@@ -1,7 +1,4 @@
 @extends('admin.blank')
-
-
-
 @section('table_th')
     <th>Proccess</th>
     <th>Name</th>
@@ -20,8 +17,8 @@
     @foreach ($data as $cat)
         <tr class="@if ($loop->odd) odd gradeX  @else even gradeC @endif">
             <td>
-                <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success">Update</button>
-                <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger">Remove</button>
+                <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success m-1">Update</button>
+                <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger m-1">Remove</button>
             </td>
             <td>{{ $cat->Title }}</td>
             <td>{{ $cat->Keywords }}</td>
@@ -40,18 +37,13 @@
                     <i class="fa-solid fa-upload fa-3x"></i>Add Image
                 </a>
             </td>
-
-
             <td>{{ $cat->Status }}</td>
-
             <td class="center">{{ $cat->created_at }}</td>
             <td class="center">{{ $cat->updated_at }}</td>
             <td class="center">{{ $cat->category->Title }}</td>
         </tr>
     @endforeach
 @endsection
-
-
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assets') }}/js/jquery-1.10.2.js"></script>

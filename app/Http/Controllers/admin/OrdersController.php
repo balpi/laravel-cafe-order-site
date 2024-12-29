@@ -32,11 +32,13 @@ class OrdersController extends Controller
             error_log($request->search);
             $search = $request->search;
 
-            $categorylist = DB::table('orders')
-                ->where('Title', 'LIKE', '%' . $search . '%')
+            $categorylist = Orders::where('Title', 'LIKE', '%' . $search . '%')
+                ->orderBy(DB::raw('case when Status= "pending" then 1 when Status= "approved" then 2 when Status= "rejected" then 3 end'))
+                ->orderBy('created_at', 'desc')
                 ->paginate($page, ['*'], 1);
         } else {
-            $categorylist = DB::table('orders')
+            $categorylist = Orders::orderBy(DB::raw('case when Status= "pending" then 1 when Status= "approved" then 2 when Status= "rejected" then 3 end'))
+                ->orderBy('created_at', 'desc')
                 ->paginate($page, ['*'], 1);
         }
 
@@ -89,9 +91,17 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Orders $category)
+    public function show($id)
     {
-        //
+        $orders = Orders::where('ID', $id)
+            ->with('Orders_Product')->with('Orders_Product.product')
+            ->orderBy('created_at', 'desc')
+            ->first()
+        ;
+
+
+
+        return view('admin.order._orderDetails', ['order' => $orders]);
     }
 
     /**
@@ -114,24 +124,22 @@ class OrdersController extends Controller
         return view('admin.order._orderFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
-    public function update(Request $request): RedirectResponse
+    public function update($id)
     {
 
-        Orders::where('ID', $request->ID)
+        error_log('----->ID BUDUR' . $id);
+        Orders::where('ID', $id)
             ->update(
                 [
-                    'Title' => $request->Title,
-                    'Keywords' => $request->Keywords,
-                    'Description' => $request->Description,
-                    'Category_ID' => $request->Category_ID,
-                    'Image' => $request->Image,
-                    'Status' => $request->Status,
+
+                    'Status' => 'approved',
                     'updated_at' => Carbon::now()
                 ]
 
             );
 
-        return redirect('admin/orders/find/' . $request->ID . '/alert');
+        return redirect(route('admin_orders_find', ['id' => $id, 'alert' => 'alertUp']));
+
 
     }
 

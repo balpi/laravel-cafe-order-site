@@ -17,12 +17,13 @@
                                 <h2 class="accordion-header" id="faqAccountHeading1">
                                     <button
                                         class="accordion-button collapsed bg-transparent fw-bold shadow-none link-primary"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#faqAccountCollapse1"
-                                        aria-expanded="false" aria-controls="faqAccountCollapse1">
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#{{ 'faqAccountCollapse1' . $faq->ID }}" aria-expanded="false"
+                                        aria-controls="faqAccountCollapse1">
                                         {{ $faq->Question }}
                                     </button>
                                 </h2>
-                                <div id="faqAccountCollapse1" class="accordion-collapse collapse"
+                                <div id="{{ 'faqAccountCollapse1' . $faq->ID }}" class="accordion-collapse collapse"
                                     aria-labelledby="faqAccountHeading1">
                                     <div class="accordion-body">
                                         <p>{{ $faq->Answer }}</p>

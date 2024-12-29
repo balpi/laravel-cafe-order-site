@@ -30,11 +30,15 @@ class CommentController extends Controller
             error_log($request->search);
             $search = $request->search;
 
-            $categorylist = DB::table('comment')
+            $categorylist = Comments::with('product')
                 ->where('Title', 'LIKE', '%' . $search . '%')
+                ->orderBy(DB::raw('case when Status= "pending" then 1 when Status= "approved" then 2 when Status= "rejected" then 3 end'))
+                ->orderBy('created_at', 'desc')
                 ->paginate($page, ['*'], 1);
         } else {
-            $categorylist = DB::table('faqs')
+            $categorylist = Comments::with('product')
+                ->orderBy(DB::raw('case when Status= "pending" then 1 when Status= "approved" then 2 when Status= "rejected" then 3 end'))
+                ->orderBy('created_at', 'desc')
                 ->paginate($page, ['*'], 1);
         }
 
@@ -79,7 +83,7 @@ class CommentController extends Controller
         );
 
 
-        return redirect('admin/comments/find/' . $creted->id . '/alert');
+        return redirect('admin/comment/find/' . $creted->id . '/alert');
 
     }
 
@@ -108,7 +112,7 @@ class CommentController extends Controller
         $data = Comments::find($id)->toArray();
 
 
-        return view('admin.comment._commentsFormUpdate', ['data' => $data, 'alert' => $alert]);
+        return view('admin.comment._commentFormUpdate', ['data' => $data, 'alert' => $alert]);
 
     }
     public function update(Request $request): RedirectResponse
@@ -118,15 +122,15 @@ class CommentController extends Controller
             ->update(
                 [
 
-                    'Question' => $request->Question,
-                    'Answer' => $request->Answer,
+                    'comment' => $request->comment,
+
                     'Status' => $request->Status,
                     'updated_at' => Carbon::now()
                 ]
 
             );
 
-        return redirect('admin/comments/find/' . $request->ID . '/alert');
+        return redirect('admin/comment/find/' . $request->ID . '/alert');
 
     }
 

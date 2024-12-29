@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreMessagesRequest;
 use App\Models\Category;
+use App\Models\Comments;
 use App\Models\Faqs;
 use App\Models\Messages;
 use App\Models\Product;
@@ -51,7 +52,6 @@ class HomeController extends Controller
 
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] += $quantity;
-            error_log('KAC OLDU  ---' . $cart[$productId]['quantity']);
         } else {
             $cart[$productId] = [
                 "id" => $product->ID,
@@ -108,23 +108,31 @@ class HomeController extends Controller
     {
         $setting = Settings::first();
         $product = Product::find($id);
-        $similarProducts = Product::where('Category_ID', $product->Category_ID)->where('ID', '!=', $product->ID)->get();
+        $similarProducts = Product::where('Category_ID', $product->Category_ID)->where('ID', '<>', $product->ID)->get();
+        $comments = Comments::where('product_ID', $product->ID)->where('Status', '=', 'approved')
+            ->get();
         return view('home._productDetail', [
             'product' => $product,
             'setting' => $setting,
-            'similarProducts' => $similarProducts
+            'similarProducts' => $similarProducts,
+            'comments' => $comments
         ]);
     }
     public function getProduct(Request $request)
     {
+
         $search = request()->input('search');
         $product = Product::where('Title', 'like', '%' . $search . '%')->get();
+
         $setting = Settings::first();
 
-        if ($product->count() < 2) {
-            $product = $product->first();
 
-            return redirect()->route('detail', ['id' => $product->ID]);
+        if ($product->count() < 2) {
+            $product = $product->firstOrFail();
+            $comments = Comments::where('product_ID', $product->ID)
+                ->where('Status', '=', 'approved')->get();
+
+            return redirect()->route('detail', ['id' => $product->ID, 'comments' => $comments, 'setting' => $setting]);
         } else {
             return view('home._getProducts', ['products' => $product, 'setting' => $setting]);
         }
@@ -175,5 +183,30 @@ class HomeController extends Controller
             session()->flash('success', 'Product removed successfully');
             return redirect(route('showcart'));
         }
+    }
+    public function addComment(Request $request)
+    {
+        $ratings = Comments::where('user_ID', auth()->user()->id)->where('product_ID', $request->Product_ID)->get();
+        if ($ratings->count() > 0) {
+            return redirect()->back()->with('error', 'You have already rated this product');
+        }
+
+        $ratings = new Comments();
+        $ratings->user_ID = auth()->user()->id;
+        $ratings->product_ID = $request->Product_ID;
+        $ratings->rate = $request->rate;
+        $ratings->comment = $request->comment;
+        $ratings->Status = 'pending';
+        $ratings->created_at = Carbon::now();
+        $ratings->updated_at = Carbon::now();
+        $ratings->IP = $request->ip();
+        try {
+            $ratings->save();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        $this->hideForm = true;
+        /*  } */
+        return redirect()->back();
     }
 }

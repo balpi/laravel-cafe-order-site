@@ -25,10 +25,15 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $messages = Messages::all();
-        $comments = Comments::all();
-        $orders = Orders::all();
-
-        return view("admin.index", ['messages' => $messages, 'comments' => $comments, 'orders' => $orders]);
+        $comments = Comments::where('Status', '=', 'pending')->get();
+        $orders = Orders::where('Status', '=', 'pending')->get();
+        $user = User::with('roles')->orderBy('created_at', 'desc')->get()->take(10);
+        return view("admin.index", [
+            'messages' => $messages,
+            'comments' => $comments,
+            'orders' => $orders,
+            'users' => $user
+        ]);
     }
     public function LoginCheck(Request $request): \Symfony\Component\HttpFoundation\RedirectResponse
     {

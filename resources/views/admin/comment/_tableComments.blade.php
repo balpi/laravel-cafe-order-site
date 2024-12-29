@@ -3,9 +3,11 @@
 
 
 @section('table_th')
+    <th>Proccess</th>
     <th>comment</th>
     <th>rate</th>
-    <th>product_id</th>
+    <th>Product</th>
+    <th>Image</th>
     <th>user_id</th>
     <th>ip</th>
 
@@ -18,13 +20,15 @@
     @foreach ($data as $cat)
         <tr class="@if ($loop->odd) odd gradeX  @else even gradeC @endif">
             <td>
-                <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success">Update</button>
-                <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger">Remove</button>
+                <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success m-1">Update</button>
+                <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger m-1">Remove</button>
             </td>
             <td>{{ $cat->comment }}</td>
             <td>{{ $cat->rate }}</td>
-            <td>{{ $cat->product_id }}</td>
-            <td>{{ $cat->user_id }}</td>
+            <td>{{ $cat->product->Title }}</td>
+            <td><img class="img-fluid img-thumbnail" src="{{ Storage::url($cat->product->Image) }}"
+                    alt="{{ $cat->product->Image }}"></td>
+            <td>{{ $cat->user->email }}</td>
             <td>{{ $cat->ip }}</td>
             <td>{{ $cat->Status }}</td>
 

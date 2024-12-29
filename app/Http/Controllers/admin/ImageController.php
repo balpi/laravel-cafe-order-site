@@ -8,6 +8,7 @@ use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
 use App\Models\Product;
 use Illuminate\Support\Carbon;
+use Storage;
 
 class ImageController extends Controller
 {
@@ -40,12 +41,7 @@ class ImageController extends Controller
      */
     public function store(StoreImageRequest $request)
     {
-        $mes = "";
-        $req = $request->except('_token');
-        foreach ($req as $id => $value) {
-            $mes .= $id . "-----> " . $value . "      ";
-        }
-        error_log('BURADAYIZ ŞİMDİ' . $mes);
+
         if ($request->AddingPage) {
             $CImage = $request->file('Image')->store('storage/Images');
         } else {
@@ -62,6 +58,8 @@ class ImageController extends Controller
                 'created_at' => Carbon::now()
             ]
         );
+
+        
         return redirect(route('admin_images_add', ['id' => $request->Product_ID]));
     }
 

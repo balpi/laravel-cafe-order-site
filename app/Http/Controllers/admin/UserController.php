@@ -57,13 +57,10 @@ class UserController extends Controller
                 ->paginate($page, ['*'], 1);
         } else {
 
-            $categorylist = User::paginate($page, ['*'], 1);
+            $categorylist = User::with('roles')->paginate($page, ['*'], 1);
 
         }
-        $str = "";
-        foreach ($categorylist as $key => $value) {
-            $str .= $key . "----";
-        }
+
 
         return view('admin.user._tableUsers', ['data' => $categorylist]);
     }
@@ -167,4 +164,5 @@ class UserController extends Controller
         User::where('id', '=', $id)->delete();
         return redirect('admin/user/?alert=alertDel');
     }
+
 }

@@ -29,7 +29,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'User_Role',
         'Adress',
         'Phone',
         'Status',
@@ -75,5 +74,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class, 'User_ID', 'ID');
 
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comments::class, 'user_ID', 'ID');
+
+    }
+    public function order()
+    {
+        return $this->hasMany(Orders::class, 'User_ID', 'ID');
+
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Roles::class);
     }
 }

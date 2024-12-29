@@ -65,41 +65,21 @@
 
                                             <form action={{ route('order_store') }} id="dynamic_form" name="dynamic_form"
                                                 method="post">
-                                                <input type="hidden" name="_token"
-                                                    value="i26t7Dnk7l8Jf9Rta5Gp5zV5OtDWqUHjxHE5nALv" autocomplete="off">
-
+                                                {{ csrf_field() }}
                                                 <input type="hidden" name="Total" id="Total"
                                                     value="{{ $total }}" autocomplete="off">
-
                                                 <div class="form-group">
-
-
-
                                                     <label for="TableNo" id="labelforTableNo">TableNo</label>
 
                                                     <input class="form-control" name="TableNo" id="TableNo"
                                                         aria-describedby="emailHelp">
                                                 </div>
-
-
-
-
-
-
-
                                                 <div class="form-group">
-
-
-
                                                     <label for="Note" id="labelforNote">Note</label>
-
                                                     <input class="form-control" name="Note" id="Note"
                                                         aria-describedby="emailHelp">
                                                 </div>
                                                 <div class="form-group d-none">
-
-
-
                                                     <label for="IP" id="labelforIP">IP</label>
 
                                                     <input class="form-control" name="IP" id="IP"

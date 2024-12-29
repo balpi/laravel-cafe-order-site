@@ -29,8 +29,8 @@
                         SliderControl</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin_maincategory') }}"><i class="fa fa-desktop fa-3x"></i>
-                        Main Categories</a>
+                    <a class="nav-link" href="{{ route('admin_setting_get') }}"><i class="fa fa-desktop fa-3x"></i>
+                        Settings</a>
                 </li>
 
                 <li class="nav-item">

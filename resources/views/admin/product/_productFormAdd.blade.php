@@ -8,8 +8,6 @@
     onclick="window.location.href='{{ route('admin_product_add') }}'"
 @endsection
 
-@section('blank_scripts')
-@endsection
 
 @section('content')
     @include('components.Form')

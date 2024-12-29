@@ -13,8 +13,6 @@
     @foreach ($data as $cat => $value)
         <div class="form-group">
 
-
-
             <label for="{{ $cat }}" id="labelfor{{ $cat }}">{{ $cat }}</label>
 
             @if (str_contains(url()->current(), 'add'))
@@ -42,13 +40,14 @@
                     @endif
                 @elseif($cat == 'Image')
                     <input type="file" class="form-control" name="{{ $cat }}" id="{{ $cat }}">
-                @elseif ($cat == 'Description')
-                    <textarea class="ckeditor" name="Description" id="Description" rows="10"></textarea>
+                @elseif ($cat == 'Description' or $cat == 'AboutUs' or $cat == 'Contact' or $cat == 'Detail')
+                    <textarea class="ckeditor" name="{{ $cat }}" id="{{ $cat }}" rows="10"></textarea>
                 @elseif (str_contains($cat, 'tatus'))
                     <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
                         aria-label="Default select example">
-                        <option selected>Active</option>
-                        <option>Passive</option>
+                        <option selected>approved</option>
+                        <option>pending</option>
+                        <option>rejected</option>
                     </select>
                 @else
                     <input class="form-control" name="{{ $cat }}" id="{{ $cat }}"
@@ -87,13 +86,14 @@
                     <script>
                         document.getElementById("labelfor{{ $cat }}").innerText = "{{ $value }}"
                     </script>
-                @elseif ($cat == 'Description' or $cat == 'AboutUs' or $cat == 'Contact')
+                @elseif ($cat == 'Description' or $cat == 'AboutUs' or $cat == 'Contact' or $cat == 'Detail')
                     <textarea class="ckeditor" name="{{ $cat }}" id="{{ $cat }}" rows="10">{{ $value }}</textarea>
                 @elseif (str_contains($cat, 'tatus'))
                     <select class="form-select" name="{{ $cat }}" id="{{ $cat }}"
                         aria-label="Default select example">
-                        <option {{ $value === 'Readed' ? 'selected' : '' }}>Readed</option>
-                        <option {{ $value === 'Pending' ? 'selected' : '' }}>Pending</option>
+                        <option {{ $value === 'approved' ? 'selected' : '' }}>approved</option>
+                        <option {{ $value === 'pending' ? 'selected' : '' }}>pending</option>
+                        <option {{ $value === 'rejected' ? 'selected' : '' }}>rejected</option>
                     </select>
                 @else
                     <input value="{{ $value }}" class="form-control" name="{{ $cat }}"
@@ -121,6 +121,14 @@
             console.error(error);
         });
     CKEDITOR.replace('Description');
+</script>
+<script>
+    ClassicEditor
+        .create(document.getElementById("Detail"))
+        .catch(error => {
+            console.error(error);
+        });
+    CKEDITOR.replace('Detail');
 </script>
 
 <script>

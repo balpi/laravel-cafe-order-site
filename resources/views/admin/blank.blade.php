@@ -18,12 +18,11 @@
 <body>
     <div id="wrapper">
         @include('admin._header')
-        <!-- /. NAV TOP  -->
+
         <nav class="navbar-default navbar-side" role="navigation">
             @include('admin._sidebar')
-
         </nav>
-        <!-- /. NAV SIDE  -->
+
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="row">
@@ -33,16 +32,15 @@
 
                     </div>
                 </div>
-                <!-- /. ROW  -->
+
                 <hr />
 
             </div>
-            <!-- /. PAGE INNER  -->
+
         </div>
-        <!-- /. PAGE WRAPPER  -->
+
     </div>
-    <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+
     <!-- JQUERY SCRIPTS -->
 
     <script src="{{ asset('assets') }}/js/jquery-1.10.2.js"></script>
