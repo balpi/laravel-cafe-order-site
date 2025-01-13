@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AboutController;
+
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ChefsController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -90,6 +91,9 @@ Route::middleware('auth')
 
             Route::post('MakeAdmin/{id}', [UserRolesController::class, "MakeAdmin"])->name('MakeAdmin');
 
+
+
+
         });
         Route::prefix('admin/images')->group(function () {
 
@@ -101,19 +105,25 @@ Route::middleware('auth')
             Route::get('remove/{id?}/{pid?}', [ImageController::class, "destroy"])->name('admin_images_remove');
 
 
-
-
         });
+
+        //Slider
+        Route::get('slider', [\App\Http\Controllers\admin\HomeController::class, "sliderControl"])->name('admin_slider');
+        Route::get('slider/add/{id}', [\App\Http\Controllers\admin\HomeController::class, "sliderAdd"])->name('admin_slider_add');
+        Route::get('slider/delete/{id?}', [\App\Http\Controllers\admin\HomeController::class, "sliderDelete"])->name('admin_slider_remove');
+        Route::post('slider/update/{id?}', [\App\Http\Controllers\admin\HomeController::class, "sliderUpdate"])->name('admin_slider_update');
+
+        Route::get('chefs', [ChefsController::class, 'index'])->name('admin_chefs');
+        Route::post('chefs/update/{id?}', [ChefsController::class, 'update'])->name('admin_chefs_update');
+        Route::get('chefs/delete/{id}', [ChefsController::class, 'destroy'])->name('admin_chefs_delete');
+        Route::post('chefs/add/{id}', [ChefsController::class, 'store'])->name('admin_chefs_add');
+
     });
 
 
 Route::middleware('auth')->group(function () {
 
     Route::get('myaccount', [UserController::class, "myaccount"])->name('myaccount');
-    Route::get('slider', [\App\Http\Controllers\admin\HomeController::class, "sliderControl"])->name('admin_slider');
-    Route::get('slider/add/{id}', [\App\Http\Controllers\admin\HomeController::class, "sliderAdd"])->name('admin_slider_add');
-    Route::get('slider/delete/{id?}', [\App\Http\Controllers\admin\HomeController::class, "sliderDelete"])->name('admin_slider_remove');
-    Route::post('slider/update/{id?}', [\App\Http\Controllers\admin\HomeController::class, "sliderUpdate"])->name('admin_slider_update');
 
 });
 Route::middleware('auth')->prefix('order')->group(function () {
@@ -138,7 +148,7 @@ route::post("/contact/sendmessage", [HomeController::class, "sendMessage"])->nam
 route::get("/detail/{id}", [HomeController::class, "product"])->name('detail');
 route::get("/search", [HomeController::class, "getProduct"])->name('getProduct');
 route::get("/procucts/{categoryID}", [HomeController::class, "procuctsforCategory"])->name('procuctsforCategory');
-route::get("/addreview", [HomeController::class, "addComment"])->name('addComment');
+route::post("/addreview", [HomeController::class, "addComment"])->name('addComment');
 
 
 /* Shopping */
@@ -146,7 +156,7 @@ route::get("/cart", [HomeController::class, "addCart"])->name('cart');
 route::get("/showcart", [HomeController::class, "showCart"])->name('showcart');
 route::get("/removeitem/{id}", [HomeController::class, "removeCartItem"])->name('removeCartItem');
 
-//route::get("/cart", [HomeController::class, "addCart"])->name('getcart');
+
 
 Route::get("/faqs", [HomeController::class, "faqs"])->name('home_faqs');
 

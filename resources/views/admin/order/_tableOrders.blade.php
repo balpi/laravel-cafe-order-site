@@ -3,7 +3,7 @@
 
 
 @section('table_th')
-    <th>Proccess</th>
+    <th style="width: 20%">Proccess</th>
     <th>User</th>
     <th>Table</th>
     <th>Total Price</th>

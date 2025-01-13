@@ -87,7 +87,7 @@
                     @endif
                     <div class="card-body">
 
-                        <form action="{{ route('addComment') }}" class="rate">
+                        <form action="{{ route('addComment') }}" method="POST" class="rate">
                             @csrf
                             <input type="hidden" name="Product_ID" value="{{ $product->ID }}">
 
@@ -110,7 +110,7 @@
 
 
                             <button type="submit" value="save" name="btn" id="btns"
-                                class="btn btn-info px-4 py-1 rating-submit">Rate</button>
+                                class="btn btn-info px-4 py-1 rating-submit m-2">Rate</button>
 
                         </form>
                     </div>

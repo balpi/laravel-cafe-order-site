@@ -85,7 +85,7 @@ class HomeController extends Controller
 
 
 
-        error_log('-------->' . $id . "=>");
+
 
         $product = Product::find($id);
         $slider = new Slider();

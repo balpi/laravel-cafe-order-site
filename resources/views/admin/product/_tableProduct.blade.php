@@ -1,23 +1,20 @@
 @extends('admin.blank')
 @section('table_th')
-    <th>Proccess</th>
-    <th>Name</th>
-    <th>Keywords</th>
-    <th>Description</th>
-    <th>CategoryID</th>
-    <th>Image</th>
-    <th>Add İmages</th>
-    <th>Status</th>
-    <th>Create Date</th>
-    <th>Last Update</th>
-    <th>CategoryName</th>
+    <th style="width: 20%">Proccess</th>
+    <th style="width: 10%">Name</th>
+    <th style="width: 10%">Keywords</th>
+    <th style="width: 20%">Description</th>
+    <th style="width: 10%">CategoryID</th>
+    <th style="width: 20%">Image</th>
+    <th style="width: 10%">Add İmages</th>
 @endsection
 
 @section('table_tbody')
     @foreach ($data as $cat)
         <tr class="@if ($loop->odd) odd gradeX  @else even gradeC @endif">
             <td>
-                <button type="button" miss="Update" data-ID="{{ $cat->ID }}" class="btn btn-success m-1">Update</button>
+                <button type="button" miss="Update" data-ID="{{ $cat->ID }}"
+                    class="btn btn-success m-1">Update</button>
                 <button type="button" miss="Delete" data-ID={{ $cat->ID }} class="btn btn-danger m-1">Remove</button>
             </td>
             <td>{{ $cat->Title }}</td>
@@ -37,10 +34,7 @@
                     <i class="fa-solid fa-upload fa-3x"></i>Add Image
                 </a>
             </td>
-            <td>{{ $cat->Status }}</td>
-            <td class="center">{{ $cat->created_at }}</td>
-            <td class="center">{{ $cat->updated_at }}</td>
-            <td class="center">{{ $cat->category->Title }}</td>
+
         </tr>
     @endforeach
 @endsection

@@ -20,27 +20,39 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin_category') }}"><i class="fa fa-book fa-3x"></i>
+                        Categories</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin_product') }}"><i class="fa fa-plane fa-3x"></i>
+                        Products</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin_users') }}"><i class="fa fa-user fa-3x"></i>
                         Users</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin_slider') }}"><i class="fa fa-user fa-3x"></i>
+                    <a class="nav-link" href="{{ route('admin_slider') }}"><i class="fa fa-desktop fa-3x"></i>
                         SliderControl</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin_setting_get') }}"><i class="fa fa-desktop fa-3x"></i>
+                    <a class="nav-link" href="{{ route('admin_chefs') }}"><i class="fa fa-desktop fa-3x"></i>
+                        ChefsController</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin_setting_get') }}"><i class="fa fa-gear fa-3x"></i>
                         Settings</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin_category') }}"><i class="fa fa-desktop fa-3x"></i>
-                        Categories</a>
-                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin_product') }}"><i class="fa fa-desktop fa-3x"></i>
-                        Products</a>
+                    <a href="{{ route('admin_orders') }}" class="nav-link"> <i class="fa fa-shopping-cart fa-3x"></i>
+                        Orders</a>
                 </li>
 
                 <li class="nav-item">
@@ -52,10 +64,7 @@
                     </button>
                     <div class="collapse" id="dashboard-collapse" style="color: white">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 "style="color: white">
-                            <li><a href="{{ route('admin_orders') }}"
-                                    class="nav-link link-white d-inline-flex text-decoration-none rounded"
-                                    style="color: white"> <i class="fa fa-shopping-cart fa-3x"></i>Orders
-                                </a></li>
+
                             <li><a href="{{ route('admin_faq') }}"
                                     class="nav-link link-white d-inline-flex text-decoration-none rounded"
                                     style="color: white"><i class="fa fa-question-circle fa-3x" style="color: white">
@@ -73,24 +82,10 @@
                         </ul>
                     </div>
                 </li>
-                </li>
 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="table.html"><i class="fa fa-table fa-3x"></i> Table Examples</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="form.html"><i class="fa fa-edit fa-3x"></i> Forms </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
-                </li>
+
+
             </ul>
 
         </div>

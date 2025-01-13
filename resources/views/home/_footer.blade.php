@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
                             <h4 class="text-primary text-uppercase mb-4">Newsletter</h4>
-                            <p>Amet justo diam dolor rebum lorem sit stet sea justo kasd</p>
+                            <p>Write us</p>
                             <form action="{{ route('admin_messages_store') }}">
                                 <div class="input-group">
                                     <input type="text" class="form-control border-white p-3"
@@ -72,8 +72,9 @@
     </div>
     <div class="container-fluid text-secondary py-4" style="background: #111111;">
         <div class="container text-center">
-            <p class="mb-0">&copy; <a class="text-white border-bottom" href="#">Your Site Name</a>. All Rights
-                Reserved. Designed by <a class="text-white border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+            <p class="mb-0">&copy; <a class="text-white border-bottom" href="#">DenizCafe</a>. All Rights
+                Reserved. Designed by <a class="text-white border-bottom" href="https://serhatbalpetek.com">Serhat
+                    Balpetek</a>
             </p>
         </div>
     </div>

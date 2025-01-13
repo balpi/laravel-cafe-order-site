@@ -26,8 +26,6 @@ return new class extends Migration {
                 ->references('ID')
                 ->on('users');
             $table->string('Status', 10);
-            //$table->timestamp('CreateDate')->nullable();
-            //$table->timestamp('UpdateDate')->nullable();
             $table->timestamps();
         });
     }

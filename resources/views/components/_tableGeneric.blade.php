@@ -1,4 +1,11 @@
+<style>
+    table {
+        table-layout: fixed;
+        word-wrap: break-word;
+    }
+</style>
 <div class="row">
+
 
     @yield('new_button')
 

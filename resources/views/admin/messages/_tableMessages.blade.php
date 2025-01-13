@@ -3,17 +3,14 @@
 
 
 @section('table_th')
-    <th>Actions</th>
-    <th> name</th>
-    <th>email</th>
-    <th>phone</th>
-    <th>subject</th>
-    <th>message</th>
-    <th>ip</th>
-    <th>status</th>
-    <th>created_at</th>
-    <th>updated_at</th>
-    <th>Admin Note</th>
+    <th style="width: 20%">Actions</th>
+    <th style="width: 10%"> name</th>
+    <th style="width: 10%">email</th>
+    <th style="width: 10%">phone</th>
+    <th style="width: 10%">subject</th>
+    <th style="width: 20%">message</th>
+    <th style="width: 10%">status</th>
+    <th style="width: 10%">Admin Note</th>
 @endsection
 
 @section('table_tbody')
@@ -28,10 +25,7 @@
             <td>{{ $cat->Phone }}</td>
             <td>{{ $cat->Subject }}</td>
             <td>{{ $cat->Message }}</td>
-            <td>{{ $cat->IP }}</td>
             <td>{{ $cat->Status }}</td>
-            <td>{{ $cat->updated_at }}</td>
-            <td>{{ $cat->created_at }}</td>
             <td>{{ $cat->Note }}</td>
 
         </tr>

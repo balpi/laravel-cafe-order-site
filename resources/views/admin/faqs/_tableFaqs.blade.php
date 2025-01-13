@@ -3,12 +3,11 @@
 
 
 @section('table_th')
-    <th>Procces</th>
-    <th>Position</th>
+    <th style="width: 20%">Procces</th>
+    <th style="width: 10%">Position</th>
     <th>Question</th>
     <th>Answer</th>
     <th>Status</th>
-    <th>Create Date</th>
     <th>Last Update</th>
 @endsection
 
@@ -25,7 +24,6 @@
 
             <td>{{ $cat->Status }}</td>
 
-            <td class="center">{{ $cat->created_at }}</td>
             <td class="center">{{ $cat->updated_at }}</td>
         </tr>
     @endforeach

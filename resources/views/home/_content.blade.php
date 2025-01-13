@@ -62,16 +62,16 @@
                     @foreach ($products as $chefs)
                         <div class="col-lg-4">
                             <div class="card border-0">
-                                <a href="{{ route('detail', ['id' => $chefs->ID]) }}">
-                                    <img src="{{ Storage::url($chefs->Image) }}" style="height: 150px"
+                                <a href="{{ route('detail', ['id' => $chefs->Product_ID]) }}">
+                                    <img src="{{ Storage::url($chefs->product->Image) }}" style="height: 150px"
                                         class="card-img-top img-responsive" alt="...">
                                 </a>
                                 <div class="card-body">
-                                    <h5 class="card-title text-uppercase">{{ $chefs->Title }}</h5>
+                                    <h5 class="card-title text-uppercase">{{ $chefs->product->Title }}</h5>
 
-                                    <a href="{{ route('order_addDirect', ['id' => $chefs->ID]) }}"
+                                    <a href="{{ route('order_addDirect', ['id' => $chefs->Product_ID]) }}"
                                         class="btn btn-primary border-inner py-3 px-5">Order Now</a>
-                                    <a href="{{ route('cart', ['product_id' => $chefs->ID]) }}"
+                                    <a href="{{ route('cart', ['product_id' => $chefs->Product_ID]) }}"
                                         class="btn btn-primary border-inner py-3 px-5">AddCart</a>
                                 </div>
                             </div>

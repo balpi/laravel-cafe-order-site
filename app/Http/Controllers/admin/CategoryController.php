@@ -75,7 +75,7 @@ class CategoryController extends Controller
                 'Keywords' => $request->Keywords,
                 'Description' => $request->Description,
                 'maincategories_ID' => $request->maincategories_ID,
-                'Image' => $request->Image,
+                'Image' => $request->file('Image')->store('storage/Images'),
                 'Status' => $request->Status,
                 'updated_at' => Carbon::now(),
                 'created_at' => Carbon::now()
@@ -119,6 +119,15 @@ class CategoryController extends Controller
     public function update(Request $request): RedirectResponse
     {
 
+        $image = "";
+        if ($request->hasFile('Image')) {
+            $image = $request->file('Image')->store('storage/Images');
+        } else {
+            $product = Category::where('ID', $request->ID)->first();
+            $image = $product->Image;
+        }
+        error_log($image);
+
         Category::where('ID', $request->ID)
             ->update(
                 [
@@ -126,7 +135,7 @@ class CategoryController extends Controller
                     'Title' => $request->Title,
                     'Keywords' => $request->Keywords,
                     'Description' => $request->Description,
-                    'Image' => $request->Image,
+                    'Image' => $image,
                     'Status' => $request->Status,
                     'updated_at' => Carbon::now()
                 ]

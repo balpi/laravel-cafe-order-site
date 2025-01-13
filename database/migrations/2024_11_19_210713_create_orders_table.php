@@ -20,8 +20,6 @@ return new class extends Migration {
             $table->string('Status', 10);
             $table->string('Note');
             $table->string('IP');
-            //$table->timestamp('Created_at')->nullable();
-            //$table->timestamp('Updated_at')->nullable();
             $table->timestamps();
         });
     }

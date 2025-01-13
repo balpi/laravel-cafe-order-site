@@ -3,28 +3,22 @@
 
 
 @section('table_th')
-    <th>id</th>
-    <th>name</th>
-    <th>Role</th>
-    <th>email</th>
-    <th>email_verified_at</th>
-    <th>password</th>
-    <th>two_factor_secret</th>
-    <th>two_factor_recovery_codes</th>
-    <th>two_factor_confirmed_at</th>
-    <th>remember_token</th>
-    <th>User_Role</th>
-    <th>current_team_</th>
-    <th>profile_photo_path</th>
-    <th>created_at</th>
-    <th>updated_at</th>
+    <th style="width: 20%">Proccess</th>
+    <th style="width: 10%">name</th>
+    <th style="width: 10%">Role</th>
+    <th style="width: 10%">email</th>
+    <th style="width: 10%">password</th>
+    <th style="width: 20%">profile_photo_path</th>
+    <th style="width: 10%">created_at</th>
+    <th style="width: 10%">updated_at</th>
 @endsection
 
 @section('table_tbody')
     @foreach ($data as $cat)
         <tr class="@if ($loop->odd) odd gradeX  @else even gradeC @endif">
             <td>
-                <button type="button" miss="Update" data-ID="{{ $cat->id }}" class="btn btn-success m-1">Update</button>
+                <button type="button" miss="Update" data-ID="{{ $cat->id }}"
+                    class="btn btn-success m-1">Update</button>
                 <button type="button" miss="Delete" data-ID={{ $cat->id }} class="btn btn-danger m-1">Remove</button>
                 <form action="{{ route('MakeAdmin', ['id' => $cat->id]) }}" method="post">
                     @csrf
@@ -41,14 +35,7 @@
             <td>{{ $cat->name }}</td>
             <td>{{ $cat->roles[0]->name }}</td>
             <td>{{ $cat->email }}</td>
-            <td>{{ $cat->email_verified_at }}</td>
             <td>{{ $cat->password }}</td>
-            <td>{{ $cat->two_factor_secret }}</td>
-            <td>{{ $cat->two_factor_recovery_codes }}</td>
-            <td>{{ $cat->two_factor_confirmed_at }}</td>
-            <td>{{ $cat->remember_token }}</td>
-            <td>{{ $cat->User_Role }}</td>
-            <td>{{ $cat->current_team_ }}</td>
             <td>{{ $cat->profile_photo_path }}</td>
             <td>{{ $cat->created_at }}</td>
             <td>{{ $cat->updated_at }}</td>

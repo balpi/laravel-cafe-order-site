@@ -9,8 +9,6 @@
     <th>Description</th>
     <th>Image</th>
     <th>Status</th>
-    <th>Create Date</th>
-    <th>Last Update</th>
 @endsection
 
 @section('table_tbody')
@@ -23,11 +21,12 @@
             <td>{{ $cat->Title }}</td>
             <td>{{ $cat->Keywords }}</td>
             <td>{{ $cat->Description }}</td>
-            <td>{{ $cat->Image }}</td>
+            <td>
+                @if ($cat->Image)
+                    <img class="img-fluid img-thumbnail" src="{{ Storage::url($cat->Image) }}" alt="">
+                @endif
+            </td>
             <td>{{ $cat->Status }}</td>
-
-            <td class="center">{{ $cat->created_at }}</td>
-            <td class="center">{{ $cat->updated_at }}</td>
         </tr>
     @endforeach
 @endsection

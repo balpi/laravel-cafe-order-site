@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreMessagesRequest;
 use App\Models\Category;
+use App\Models\Chefs;
 use App\Models\Comments;
 use App\Models\Faqs;
 use App\Models\Messages;
@@ -19,7 +20,7 @@ class HomeController extends Controller
     {
         $setting = Settings::first();
         $categories = Category::all();
-        $product = Product::all()->take(9);
+        $product = Chefs::with('product')->get();
         $sliders = Slider::with('product')->get();
         if ((!$setting)) {
 
@@ -186,10 +187,15 @@ class HomeController extends Controller
     }
     public function addComment(Request $request)
     {
-        $ratings = Comments::where('user_ID', auth()->user()->id)->where('product_ID', $request->Product_ID)->get();
+
+        $ratings = Comments::where('user_ID', auth()->user()->id)
+            ->where('product_ID', $request->Product_ID)
+            ->where('Status', '<>', 'rejected')
+            ->get();
         if ($ratings->count() > 0) {
             return redirect()->back()->with('error', 'You have already rated this product');
         }
+
 
         $ratings = new Comments();
         $ratings->user_ID = auth()->user()->id;
@@ -199,10 +205,12 @@ class HomeController extends Controller
         $ratings->Status = 'pending';
         $ratings->created_at = Carbon::now();
         $ratings->updated_at = Carbon::now();
-        $ratings->IP = $request->ip();
+        $ratings->ip = $request->ip();
         try {
+
             $ratings->save();
         } catch (\Throwable $th) {
+
             throw $th;
         }
         $this->hideForm = true;
